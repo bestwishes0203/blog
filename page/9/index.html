@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="生活，旅行，思考，代码" />
+       
+      <meta name="description" content="有事者,事竟成;破釜沉舟,百二秦关终归楚;苦心人,天不负;卧薪尝胆,三千越甲可吞吴。" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title> 何福海的个人博客</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/blog/favicon.ico" />
+       
+<link rel="stylesheet" href="/blog/dist/main.css">
+
+      
+<link rel="stylesheet" href="/blog/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/blog/css/custom.css">
+  
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/blog/atom.xml" title="何福海的个人博客" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      
+<section class="cover">
+    
+      
+      <a class="forkMe" href="https://gitee.com/bestwishes0203"
+        target="_blank"><img width="149" height="149" src="/blog/images/forkme.png"
+          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+    
+  <div class="cover-frame">
+    <div class="bg-box">
+      <img src="/blog/images/cover1.jpg" alt="image frame" />
+    </div>
+    <div class="cover-inner text-center text-white">
+      <h1><a href="/blog/">何福海的个人博客</a></h1>
+      <div id="subtitle-box">
+        
+        <span id="subtitle"></span>
+        
+      </div>
+      <div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="cover-learn-more">
+    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
+  </div>
+</section>
+
+
+
+<script src="https://cdn.staticfile.org/typed.js/2.0.12/typed.min.js"></script>
+
+
+<!-- Subtitle -->
+
+  <script>
+    try {
+      var typed = new Typed("#subtitle", {
+        strings: ['面朝大海，春暖花开', '一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
+        startDelay: 0,
+        typeSpeed: 200,
+        loop: true,
+        backSpeed: 100,
+        showCursor: true
+      });
+    } catch (err) {
+      console.log(err)
+    }
+  </script>
+  
+<div id="main">
+  <section class="outer">
+  
+  
+  
+
+<div class="notice" style="margin-top:50px">
+    <i class="ri-heart-fill"></i>
+    <div class="notice-content" id="broad"></div>
+</div>
+<script type="text/javascript">
+    fetch('https://v1.hitokoto.cn')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("broad").innerHTML = data.hitokoto;
+        })
+        .catch(console.error)
+</script>
+
+<style>
+    .notice {
+        padding: 20px;
+        border: 1px dashed #e6e6e6;
+        color: #969696;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        background: #fbfbfb50;
+        border-radius: 10px;
+    }
+
+    .notice i {
+        float: left;
+        color: #999;
+        font-size: 16px;
+        padding-right: 10px;
+        vertical-align: middle;
+        margin-top: -2px;
+    }
+
+    .notice-content {
+        display: initial;
+        vertical-align: middle;
+    }
+</style>
+  
+  <article class="articles">
+    
+    
+    
+    
+    <article
+  id="post-MySQL基本使用"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/blog/2024/02/09/MySQL%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"
+    >MySQL基本使用</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/blog/2024/02/09/MySQL%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="article-date">
+  <time datetime="2024-02-09T14:54:27.000Z" itemprop="datePublished">2024-02-09</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="MySQL基本使用"><a href="#MySQL基本使用" class="headerlink" title="MySQL基本使用"></a>MySQL基本使用</h1><p>1.安装类型：</p>
+<p>​	developer default（开发者默认）：安装mysql开发所需的所有产品<br>​	server only（服务器）：只安装mysql服务器产品<br>​	client only（客户端）：只安装没有服务器的mysql客户端产品<br>​	full（完全）：安装所有包含的mysql产品和功能</p>
+<p>cd D:\Program\mysql-8.0.30-winx64\bin</p>
+<p>查看用户信息<br>mysqld –initialize –comsole</p>
+<p>下载<br>mysqld –install</p>
+<p>开启服务<br>net start mysql<br>关闭服务<br>net stop mysql</p>
+<p>修改密码<br>ALTER USER ‘root‘@’localhost’ IDENTIFIED BY ‘123456’;</p>
+<p>登录<br>mysql -uroot -p</p>
+<p>登录<br>mysql -h localhost -u root -p</p>
+<p>查看版本信息<br>status</p>
+<p>–DDL 数据定义语言 定义数据对象</p>
+<p>–数据库操作；</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> databases;</span><br><span class="line"><span class="keyword">create</span> database  casedb;</span><br><span class="line"><span class="keyword">create</span> database [if <span class="keyword">not</span> <span class="keyword">exists</span>] casedb;</span><br><span class="line">use casedb;</span><br><span class="line"><span class="keyword">select</span> database();</span><br><span class="line"><span class="keyword">drop</span> database casedb;</span><br><span class="line"><span class="keyword">alter</span> database casedb <span class="type">character</span> <span class="keyword">set</span> utf<span class="number">-8</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>–表操作；</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> tables;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> stu;</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> stu;</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> if <span class="keyword">exists</span> emp;</span><br><span class="line"><span class="keyword">truncate</span> <span class="keyword">table</span> emp;</span><br><span class="line"><span class="keyword">desc</span> stu;</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">table</span> stu;</span><br></pre></td></tr></table></figure>
+
+<p>–关键字<br>    –add<br>    –modify change<br>    –drop<br>    –rename …</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> stu <span class="keyword">add</span> nickname <span class="type">varchar</span>(<span class="number">20</span>) comment <span class="string">&#x27;昵称&#x27;</span>;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> stu change nickname username <span class="type">varchar</span>(<span class="number">10</span>) comment <span class="string">&#x27;用户名&#x27;</span>;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> stu <span class="keyword">drop</span> username;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emop rename <span class="keyword">to</span> employee;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>–*******************************************************************************************<br>–DML 数据操作语言</p>
+<p>–关键字<br>    –insert 增<br>    –delete 删<br>    –update 改 </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> stu(title,auther,data) <span class="keyword">values</span> (&quot;t&quot;,&quot;a&quot;,&quot;d&quot;);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> stu <span class="keyword">values</span> (&quot;t&quot;,&quot;a&quot;,&quot;d&quot;...);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> stu <span class="keyword">values</span> (&quot;t&quot;,&quot;a&quot;,&quot;d&quot;),(&quot;t1&quot;,&quot;a1&quot;,&quot;d1&quot;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> emp ;</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> emp <span class="keyword">where</span> gender <span class="operator">=</span> <span class="string">&#x27;1&#x27;</span>;</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> tableName <span class="keyword">where</span> tableId<span class="operator">=</span><span class="number">3</span>;</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> tableName [<span class="keyword">where</span> clause];</span><br><span class="line"></span><br><span class="line"><span class="keyword">update</span> tableName <span class="keyword">set</span> title<span class="operator">=</span><span class="string">&#x27;studrc&#x27;</span> <span class="keyword">where</span> tableId<span class="operator">=</span><span class="number">3</span>;</span><br><span class="line"><span class="keyword">update</span> emp <span class="keyword">set</span> name<span class="operator">=</span><span class="string">&#x27;itheima&#x27;</span> <span class="keyword">where</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"><span class="keyword">update</span> emp <span class="keyword">set</span> name<span class="operator">=</span><span class="string">&#x27;hfh&#x27;</span>, gender <span class="operator">=</span><span class="string">&#x27;2&#x27;</span> <span class="keyword">where</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"><span class="keyword">update</span> emp <span class="keyword">set</span> worktime<span class="operator">=</span><span class="string">&#x27;2008-01-01&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+
+<p>–*******************************************************************************************<br>–DQL 数据查询语言</p>
+<p>– 编写顺序<br>    –select 字段列表<br>    –from 表名列表<br>    –where 条件列表<br>    –group by 分组字段查询<br>    –having 分组后条件列表<br>    –order by 排序字段列表<br>    –limit 分页参数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> 字段列表 <span class="keyword">from</span> 表名;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp;</span><br><span class="line"><span class="keyword">select</span> workadddress <span class="keyword">from</span> emp;</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> workadddress <span class="keyword">from</span> emp;</span><br><span class="line"><span class="keyword">select</span> id,name,workno,score,gender,age <span class="keyword">from</span> emp;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>–聚合函数<br>    –count 统计数量<br>    –max 最大值<br>    –min 最小值<br>    –avg 平均数<br>    –sum 求和</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">from</span> emp;</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>(idcard) <span class="keyword">from</span> emp;</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">max</span>(age) <span class="keyword">from</span> emp;</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">min</span>(age) <span class="keyword">from</span> emp;</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">avg</span>(age) <span class="keyword">from</span> emp;</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">sum</span>(age) <span class="keyword">from</span> emp <span class="keyword">where</span> workaddress <span class="operator">=</span> <span class="string">&#x27;西安&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>–条件查询 where<br>    –&gt; &gt;&#x3D; &lt; &lt;&#x3D; &#x3D; &lt;&gt; !&#x3D;<br>    –between and<br>    –in()<br>    –like ‘_ _’<br>    –is null<br>    –and &amp;&amp; or || not !</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> 字段列表 <span class="keyword">from</span> 表名 <span class="keyword">where</span> 条件;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> age <span class="operator">=</span> <span class="number">80</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> age <span class="operator">&lt;</span> <span class="number">80</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> idcard <span class="keyword">is</span> <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> idcard <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> age <span class="operator">!=</span> <span class="number">80</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> age <span class="operator">&lt;&gt;</span> <span class="number">80</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> age <span class="operator">&lt;=</span> <span class="number">80</span> <span class="operator">&amp;&amp;</span> age <span class="operator">&gt;=</span> <span class="number">18</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> <span class="keyword">between</span> <span class="number">15</span> <span class="keyword">and</span> <span class="number">80</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> gender<span class="operator">=</span><span class="string">&#x27;女&#x27;</span>  <span class="keyword">and</span> age <span class="operator">=</span> <span class="number">18</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> age <span class="operator">=</span> <span class="number">15</span> <span class="keyword">or</span> age <span class="operator">=</span> <span class="number">18</span> <span class="keyword">or</span> age <span class="operator">=</span> <span class="number">20</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> age <span class="keyword">in</span>(<span class="number">15</span>,<span class="number">18</span>,<span class="number">20</span>);</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> name <span class="keyword">like</span> <span class="string">&#x27;_ _&#x27;</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> idcard <span class="keyword">like</span> <span class="string">&#x27;%x&#x27;</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> idcard <span class="keyword">like</span> <span class="string">&#x27;_________________x&#x27;</span>;</span><br><span class="line"><span class="keyword">select</span> 字段列表 <span class="keyword">from</span> 表名 <span class="keyword">where</span> 条件;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>–分组查询 group by<br>    –执行顺序：where&gt;聚合函数&gt; having</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> 字段列表 <span class="keyword">from</span> 表名 <span class="keyword">where</span> 条件 <span class="keyword">group</span> <span class="keyword">by</span> 分组字段 <span class="keyword">having</span> 分组后过滤条件;</span><br><span class="line"><span class="keyword">select</span> gender, <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> gender;</span><br><span class="line"><span class="keyword">select</span> gender, <span class="built_in">avg</span>(<span class="operator">*</span>) <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> gender;</span><br><span class="line"><span class="keyword">select</span> workaddress, <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">from</span> emp <span class="keyword">where</span> age<span class="operator">&lt;</span><span class="number">30</span> <span class="keyword">group</span> <span class="keyword">by</span> workaddress <span class="keyword">having</span> <span class="built_in">count</span>(<span class="operator">*</span>) <span class="operator">&gt;=</span> <span class="number">3</span>;</span><br><span class="line"><span class="keyword">select</span> workaddress, <span class="built_in">count</span>(<span class="operator">*</span>) address_count <span class="keyword">from</span> emp <span class="keyword">where</span> age<span class="operator">&lt;</span><span class="number">30</span> <span class="keyword">group</span> <span class="keyword">by</span> workaddress <span class="keyword">having</span> address_count <span class="operator">&gt;=</span> <span class="number">3</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>–排序查询 order by<br>    –asc 升序<br>    –desc 降序</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> 字段列表 <span class="keyword">from</span> 表名 <span class="keyword">order</span> <span class="keyword">by</span> 字段<span class="number">1</span> 排序方式<span class="number">1</span>,字段<span class="number">2</span> 排序方式<span class="number">2</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">order</span> <span class="keyword">by</span> age <span class="keyword">asc</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">order</span> <span class="keyword">by</span> age <span class="keyword">desc</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">order</span> <span class="keyword">by</span> enterdate <span class="keyword">desc</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">order</span> <span class="keyword">by</span> age <span class="keyword">asc</span>, enterdate <span class="keyword">desc</span> ;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>–分页查询 limit<br>    –起始索引&#x3D;（查询页码-1）* 每页的记录数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> 字段列表 <span class="keyword">from</span> 表名 limit 起始索引, 查询记录数;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp limit <span class="number">0</span>,<span class="number">10</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp limit <span class="number">10</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp limit <span class="number">10</span>,<span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<p>–案例</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> gender <span class="operator">=</span> <span class="string">&#x27;女&#x27;</span> <span class="keyword">and</span> age <span class="keyword">in</span> (<span class="number">18</span>,<span class="number">19</span>,<span class="number">20</span>);</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> gender <span class="operator">=</span> <span class="string">&#x27;女&#x27;</span> <span class="keyword">and</span> (age <span class="keyword">between</span> <span class="number">10</span> <span class="keyword">and</span> <span class="number">20</span>) <span class="keyword">and</span> name <span class="keyword">like</span> <span class="string">&#x27;_ _ _&#x27;</span>;</span><br><span class="line"><span class="keyword">select</span> gender, <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">from</span> emp <span class="keyword">where</span> age<span class="operator">&lt;</span><span class="number">20</span> <span class="keyword">group</span> <span class="keyword">by</span> gender;</span><br><span class="line"><span class="keyword">select</span> name, age <span class="keyword">from</span> emp <span class="keyword">where</span> age<span class="operator">&lt;=</span><span class="number">20</span> <span class="keyword">group</span> <span class="keyword">by</span> age <span class="keyword">asc</span>, entrydate <span class="keyword">desc</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> gender <span class="operator">=</span> <span class="string">&#x27;男&#x27;</span> <span class="keyword">and</span> age <span class="keyword">between</span> <span class="number">20</span> <span class="keyword">and</span> <span class="number">40</span> <span class="keyword">order</span> <span class="keyword">by</span> age <span class="keyword">asc</span> , entrydate <span class="keyword">asc</span> limit <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--执行顺序验证</span></span><br><span class="line">    <span class="comment">--form</span></span><br><span class="line">    <span class="comment">--where</span></span><br><span class="line">    <span class="comment">--group by</span></span><br><span class="line">    <span class="comment">--select</span></span><br><span class="line">    <span class="comment">--order by &amp;&amp; having</span></span><br><span class="line">    <span class="comment">--limit</span></span><br><span class="line"><span class="keyword">select</span> name, age <span class="keyword">from</span> emp <span class="keyword">where</span> age <span class="operator">&gt;</span><span class="number">15</span> <span class="keyword">order</span> <span class="keyword">by</span> age <span class="keyword">asc</span>;</span><br><span class="line"><span class="keyword">select</span> name, age <span class="keyword">from</span> emp e <span class="keyword">where</span> e.age <span class="operator">&gt;</span><span class="number">15</span> <span class="keyword">order</span> <span class="keyword">by</span> age <span class="keyword">asc</span>;</span><br><span class="line"><span class="keyword">select</span> e.name, age <span class="keyword">from</span> emp e <span class="keyword">where</span> e.age <span class="operator">&gt;</span><span class="number">15</span> <span class="keyword">order</span> <span class="keyword">by</span> age <span class="keyword">asc</span>;</span><br><span class="line"><span class="keyword">select</span> e.name ename , age <span class="keyword">from</span> emp e <span class="keyword">where</span> e.age <span class="operator">&gt;</span><span class="number">15</span> <span class="keyword">order</span> <span class="keyword">by</span> age <span class="keyword">asc</span>;</span><br><span class="line"><span class="keyword">select</span> e.name ename , age <span class="keyword">from</span> emp e <span class="keyword">where</span> e.age <span class="operator">&gt;</span><span class="number">15</span> <span class="keyword">order</span> <span class="keyword">by</span> eage <span class="keyword">asc</span>; (X)</span><br><span class="line"><span class="keyword">select</span> e.name ename , age eage <span class="keyword">from</span> emp e <span class="keyword">where</span> e.age <span class="operator">&gt;</span><span class="number">15</span> <span class="keyword">order</span> <span class="keyword">by</span> eage <span class="keyword">asc</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">--*******************************************************************************************</span></span><br><span class="line"><span class="comment">--DCL 数据控制语言：管理用户&amp;&amp;权限控制</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--管理用户</span></span><br><span class="line">    <span class="comment">--	查询用户</span></span><br><span class="line">    <span class="comment">--	创建用户</span></span><br><span class="line">    <span class="comment">--	修改用户密码</span></span><br><span class="line">    <span class="comment">--	删除用户</span></span><br><span class="line">use mysql;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建用户 itcast , 只能够在当前主机localhost访问, 密码123456;</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;itcast&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;123456&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建用户 heima , 可以在任意主机访问该数据库, 密码123456 ;</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;heima&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;123456&#x27;</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;用户名&#x27;</span> @ <span class="string">&#x27;主机名&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;密码&#x27;</span>；</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;itcast&#x27;</span> @ <span class="string">&#x27;localhost&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;123456&#x27;</span>；</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;itcast&#x27;</span> @ <span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;123456&#x27;</span>；</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 修改用户 heima 的访问密码为 1234 ;</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> <span class="string">&#x27;heima&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">with</span> mysql_native_password <span class="keyword">by</span> <span class="string">&#x27;1234&#x27;</span>;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> <span class="string">&#x27;用户名&#x27;</span> @ <span class="string">&#x27;主机名&#x27;</span> identified <span class="keyword">with</span> mysql_native_password <span class="keyword">by</span> <span class="string">&#x27;新密码&#x27;</span>；</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> <span class="string">&#x27;itcast&#x27;</span> @ <span class="string">&#x27;%&#x27;</span> identified <span class="keyword">with</span> mysql_native_password <span class="keyword">by</span> <span class="string">&#x27;1234&#x27;</span>；</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除itcast@localhost用户</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">user</span> <span class="string">&#x27;itcast&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span>;</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">user</span> <span class="string">&#x27;用户名&#x27;</span> @ <span class="string">&#x27;主机名&#x27;</span>；</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">user</span> <span class="string">&#x27;itcast&#x27;</span> @ <span class="string">&#x27;localhost&#x27;</span>；</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--权限控制</span></span><br><span class="line">    <span class="comment">--all,all peivileges 所有权限</span></span><br><span class="line">    <span class="comment">--select 查询数据</span></span><br><span class="line">    <span class="comment">--insert 插入数据</span></span><br><span class="line">    <span class="comment">--update 修改数据</span></span><br><span class="line">    <span class="comment">--delete 删除数据</span></span><br><span class="line">    <span class="comment">--alter 修改表</span></span><br><span class="line">    <span class="comment">--drop 删除数据库/表/视图</span></span><br><span class="line">    <span class="comment">--create 创建数据库/表</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">--查询权限show</span></span><br><span class="line">    <span class="comment">--授予权限grant</span></span><br><span class="line">    <span class="comment">--撤销权限revoke</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询权限</span></span><br><span class="line"><span class="keyword">show</span> grants <span class="keyword">for</span> <span class="string">&#x27;heima&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line"><span class="comment">-- 授予权限</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">on</span> itcast.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;heima&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line"><span class="comment">-- 撤销权限</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">revoke</span> <span class="keyword">all</span> <span class="keyword">on</span> itcast.<span class="operator">*</span> <span class="keyword">from</span> <span class="string">&#x27;heima&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line"><span class="keyword">show</span> grants <span class="keyword">for</span> <span class="string">&#x27;用户名&#x27;</span>@<span class="string">&#x27;主机名&#x27;</span>;</span><br><span class="line"><span class="keyword">grant</span> 权限列表 <span class="keyword">on</span> 数据库名.表名 <span class="keyword">to</span> <span class="string">&#x27;用户名&#x27;</span>@‘主机名’;</span><br><span class="line"><span class="keyword">grant</span> 权限列表 <span class="keyword">on</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;itcast&#x27;</span>@‘localhost’;</span><br><span class="line"><span class="keyword">revoke</span> 权限列表 <span class="keyword">on</span> 数据库名.表名 <span class="keyword">from</span> <span class="string">&#x27;用户名&#x27;</span>@‘主机名’;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--*******************************************************************************************</span></span><br><span class="line"><span class="comment">--函数</span></span><br><span class="line">    <span class="comment">--字符串函数</span></span><br><span class="line">    <span class="comment">--数值函数</span></span><br><span class="line">    <span class="comment">--日期函数</span></span><br><span class="line">    <span class="comment">--流程函数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--字符串函数</span></span><br><span class="line">    <span class="comment">--CONCAT(s1,s2,s3...) 字符串拼接</span></span><br><span class="line">    <span class="comment">--LOWER(str) 字符串全部转为小写</span></span><br><span class="line">    <span class="comment">--UPPER(str) 字符串全部转为大写</span></span><br><span class="line">    <span class="comment">--LPAD(str,n,pad) 左填充 用字符串PAD对str左边进行填充 达到n个字符串长度</span></span><br><span class="line">    <span class="comment">--RPAD(str,n,pad) 右填充 </span></span><br><span class="line">    <span class="comment">--TRIM(str) 去掉字符串头部和尾部的空格</span></span><br><span class="line">    <span class="comment">--SUBSTRING(str,start,len) 返回从字符串str从start位置起的len个长度的字符串</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> concat (<span class="string">&#x27;hello&#x27;</span> ,<span class="string">&#x27;mysql&#x27;</span>);</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">lower</span> (<span class="string">&#x27;HELLP&#x27;</span> ,<span class="string">&#x27;MYSQL&#x27;</span>);</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">upper</span> (<span class="string">&#x27;hello&#x27;</span> ,<span class="string">&#x27;mysql&#x27;</span>);</span><br><span class="line"><span class="keyword">select</span> lpad (<span class="string">&#x27;01&#x27;</span> ,<span class="number">5</span>，<span class="string">&#x27;-&#x27;</span>);</span><br><span class="line"><span class="keyword">select</span> rpad (<span class="string">&#x27;01&#x27;</span> ,<span class="number">5</span>,<span class="string">&#x27;-&#x27;</span>);</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">trim</span> (<span class="string">&#x27;     hello mysql      &#x27;</span>);</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">substring</span> (<span class="string">&#x27;hello mysql&#x27;</span> ,<span class="number">1</span> , <span class="number">5</span> );</span><br><span class="line"></span><br><span class="line"><span class="keyword">update</span> emp <span class="keyword">set</span> workno <span class="operator">=</span> lpad (workno ,<span class="number">5</span> , <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">--数值函数</span></span><br><span class="line">    <span class="comment">--CELT(x)  向上取整</span></span><br><span class="line">    <span class="comment">--FLOOR(x)  向下取整</span></span><br><span class="line">    <span class="comment">--MOD(x,y)  返回x/y的模</span></span><br><span class="line">    <span class="comment">--RANG()  返回0~1内的随机数</span></span><br><span class="line">    <span class="comment">--ROUND(x,y)  求参数x的四舍五入的值，保留y的小数位</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">ceil</span>(<span class="number">1.1</span>);</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">floor</span>(<span class="number">1.1</span>);</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">mod</span>(<span class="number">3</span>,<span class="number">4</span>);</span><br><span class="line"><span class="keyword">select</span> rand();</span><br><span class="line"><span class="keyword">select</span> round(<span class="number">2.34555</span>,<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">--生成随机六位验证码</span></span><br><span class="line"><span class="keyword">select</span> round(rand()<span class="operator">*</span><span class="number">1000000</span> , <span class="number">0</span>);</span><br><span class="line"><span class="keyword">select</span> lpad(round(rand()<span class="operator">*</span><span class="number">1000000</span> , <span class="number">0</span>) ,<span class="number">6</span> , <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">--日期函数</span></span><br><span class="line">    <span class="comment">--curdate()  返回当前日期</span></span><br><span class="line">    <span class="comment">--curtime()  返回当前时间</span></span><br><span class="line">    <span class="comment">--now()  返回当前日期和时间</span></span><br><span class="line">    <span class="comment">--year(date)  获取指定date的年份</span></span><br><span class="line">    <span class="comment">--month(date)  获取指定date的月份</span></span><br><span class="line">    <span class="comment">--day(date)  获取指定date的日期</span></span><br><span class="line">    <span class="comment">--date_add(date, interval expr type)  返回一个日期/时间值加上一个时间间隔expr后的时间值</span></span><br><span class="line">    <span class="comment">--datediff(date1, date2)  返回起始时间date1和结束时间date2之间的天数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> curdate();</span><br><span class="line"><span class="keyword">select</span> curtime();</span><br><span class="line"><span class="keyword">select</span> now();</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">year</span>(now());</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">month</span>(now());</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">day</span>(now());</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> date_add(now(), <span class="type">interval</span> <span class="number">70</span> days);</span><br><span class="line"><span class="keyword">select</span> date_add(now(), <span class="type">interval</span> <span class="number">70</span> <span class="keyword">month</span>);</span><br><span class="line"><span class="keyword">select</span> date_add(now(), <span class="type">interval</span> <span class="number">70</span> <span class="keyword">year</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> datediff(<span class="string">&#x27;2021-12-01&#x27;</span>, <span class="string">&#x27;2021-10-01&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp;</span><br><span class="line"><span class="keyword">select</span> name,datediff(curdate(), entryfate ) <span class="keyword">from</span> emp ;</span><br><span class="line"><span class="keyword">select</span> name,datediff(curdate(), entryfate )<span class="keyword">as</span> <span class="string">&#x27;entrydays&#x27;</span> <span class="keyword">from</span> emp <span class="keyword">order</span> <span class="keyword">by</span> entrydays <span class="keyword">desc</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">--流程控制</span></span><br><span class="line">if(<span class="keyword">value</span>, t, f );  如果<span class="keyword">value</span>为<span class="literal">true</span>，则返回t，否则返回f；</span><br><span class="line">ifnull(value1, value2);  如果<span class="keyword">value</span>不为空，返回value1，否则返回value2；</span><br><span class="line"><span class="keyword">case</span> <span class="keyword">when</span>[val1] <span class="keyword">then</span> [res1] ...<span class="keyword">else</span> [<span class="keyword">default</span>] <span class="keyword">end</span>;  如果<span class="keyword">value</span>为<span class="literal">true</span>，...否则返回<span class="keyword">default</span>默认值；</span><br><span class="line"><span class="keyword">case</span> [expr] <span class="keyword">when</span> [val1] <span class="keyword">then</span> [res1] ...<span class="keyword">else</span> [<span class="keyword">default</span>] <span class="keyword">end</span>;  如果expr的值等于val1，返回res1，...否则返回<span class="keyword">default</span>默认值；</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> if (<span class="literal">false</span> ,<span class="string">&#x27;ok&#x27;</span>, <span class="string">&#x27;err&#x27;</span>);</span><br><span class="line"><span class="keyword">select</span> ifnull(<span class="string">&#x27;ok&#x27;</span>, <span class="string">&#x27;default&#x27;</span>);</span><br><span class="line"><span class="keyword">select</span> ifnull(<span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;default&#x27;</span>);</span><br><span class="line"><span class="keyword">select</span> ifnull (<span class="keyword">null</span>, <span class="string">&#x27;default&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">--case when then else end</span></span><br><span class="line"><span class="keyword">select</span> name,(<span class="keyword">case</span> workadress <span class="keyword">when</span> <span class="string">&#x27;北京&#x27;</span> <span class="keyword">then</span> <span class="string">&#x27;上海&#x27;</span> <span class="keyword">then</span> <span class="string">&#x27;一线城市&#x27;</span> <span class="keyword">else</span> <span class="string">&#x27;二线城市&#x27;</span> <span class="keyword">end</span>) <span class="keyword">as</span> <span class="string">&#x27;工作地址&#x27;</span> <span class="keyword">from</span> emp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> score(</span><br><span class="line">	id <span class="type">int</span> comment <span class="string">&#x27;ID&#x27;</span>,</span><br><span class="line">	name <span class="type">varchar</span>(<span class="number">20</span>) comment <span class="string">&#x27;NAME&#x27;</span>，</span><br><span class="line">	math <span class="type">int</span> comment <span class="string">&#x27;MATH&#x27;</span>,</span><br><span class="line">	english <span class="type">int</span> comment <span class="string">&#x27;ENGLISH&#x27;</span>,</span><br><span class="line">	chinese <span class="type">int</span> comment <span class="string">&#x27;CHINESE&#x27;</span></span><br><span class="line">) comment <span class="string">&#x27;SCORE&#x27;</span>;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> score (id, name, math, english, chinses) <span class="keyword">values</span> (<span class="number">1</span>,<span class="string">&#x27;Tom&#x27;</span> ,<span class="number">79</span>,<span class="number">88</span>,<span class="number">99</span>), (<span class="number">2</span>,<span class="string">&#x27;ROSE&#x27;</span> ,<span class="number">79</span>,<span class="number">88</span>,<span class="number">99</span>), (<span class="number">3</span>,<span class="string">&#x27;JACK&#x27;</span> ,<span class="number">79</span>,<span class="number">88</span>,<span class="number">99</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> id,name,</span><br><span class="line">       (<span class="keyword">case</span> <span class="keyword">when</span> math<span class="operator">&gt;=</span><span class="number">85</span> <span class="keyword">then</span> <span class="string">&#x27;great&#x27;</span> <span class="keyword">when</span> math<span class="operator">&gt;=</span><span class="number">60</span> <span class="keyword">then</span> <span class="string">&#x27;good&#x27;</span> <span class="keyword">else</span> <span class="string">&#x27;bad&#x27;</span> <span class="keyword">end</span> )<span class="string">&#x27;math&#x27;</span>,</span><br><span class="line">       (<span class="keyword">case</span> <span class="keyword">when</span> math<span class="operator">&gt;=</span><span class="number">85</span> <span class="keyword">then</span> <span class="string">&#x27;great&#x27;</span> <span class="keyword">when</span> math<span class="operator">&gt;=</span><span class="number">60</span> <span class="keyword">then</span> <span class="string">&#x27;good&#x27;</span> <span class="keyword">else</span> <span class="string">&#x27;bad&#x27;</span> <span class="keyword">end</span> )<span class="string">&#x27;math&#x27;</span>,</span><br><span class="line">       (<span class="keyword">case</span> <span class="keyword">when</span> math<span class="operator">&gt;=</span><span class="number">85</span> <span class="keyword">then</span> <span class="string">&#x27;great&#x27;</span> <span class="keyword">when</span> math<span class="operator">&gt;=</span><span class="number">60</span> <span class="keyword">then</span> <span class="string">&#x27;good&#x27;</span> <span class="keyword">else</span> <span class="string">&#x27;bad&#x27;</span> <span class="keyword">end</span> )<span class="string">&#x27;math&#x27;</span> </span><br><span class="line"><span class="keyword">from</span> score;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--*******************************************************************************************</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--约束</span></span><br><span class="line">	<span class="comment">--not null        非空约束 限制该字段的数据不能为null</span></span><br><span class="line">	<span class="comment">--unique          唯一约束 保证该字段的所有数据都是唯一的</span></span><br><span class="line">	<span class="comment">--primary key   主键约束 主键是一行数据的唯一的标识符要求非空且唯一</span></span><br><span class="line">	<span class="comment">--default          默认约 束 保存数据时如果未指定该字段则采用默认值</span></span><br><span class="line">	<span class="comment">--check            检查约束 保存字段值满足某一要求</span></span><br><span class="line">	<span class="comment">--foreign key    外键约束 用来让两张表之间建立链接保证数据的一致性和完整性</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">user</span>(</span><br><span class="line">    id <span class="type">int</span> <span class="keyword">primary</span> key auto_increment comment <span class="string">&#x27;主键&#x27;</span>,</span><br><span class="line">    name <span class="type">varchar</span>(<span class="number">10</span>) <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">unique</span> comment <span class="string">&#x27;姓名&#x27;</span>,</span><br><span class="line">    age <span class="type">int</span> <span class="keyword">check</span> (age<span class="operator">&gt;</span><span class="number">0</span><span class="operator">&amp;&amp;</span>user.age<span class="operator">&lt;=</span><span class="number">120</span> ) comment <span class="string">&#x27;年龄&#x27;</span>,</span><br><span class="line">    status <span class="type">char</span>(<span class="number">1</span>) <span class="keyword">default</span> <span class="string">&#x27;1&#x27;</span> comment <span class="string">&#x27;状态&#x27;</span>,</span><br><span class="line">    gender <span class="type">char</span>(<span class="number">1</span>) comment <span class="string">&#x27;性别&#x27;</span></span><br><span class="line">)comment <span class="string">&#x27;用户表&#x27;</span>;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">user</span> (name, age, status, gender) vakues (<span class="string">&#x27;jack&#x27;</span>, <span class="number">18</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;男&#x27;</span>)，(<span class="string">&#x27;tom&#x27;</span>, <span class="number">20</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;男&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">--外键约束 foreign key</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span>s <span class="keyword">user</span>(</span><br><span class="line">	字段名  数据类型，</span><br><span class="line">	...</span><br><span class="line">	<span class="keyword">constraint</span> 外键名称 <span class="keyword">foreign</span> key(外键字段名) <span class="keyword">references</span> 主表(主表列名)</span><br><span class="line">);</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">add</span> <span class="keyword">constraint</span> 外键名称 <span class="keyword">foreign</span> key(外键字段名)  <span class="keyword">references</span> 主表(主表列名)；</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp <span class="keyword">add</span> <span class="keyword">constraint</span> fk_emp_dept_id <span class="keyword">foreign</span> key(dept_id)  <span class="keyword">references</span> dept(id)；</span><br><span class="line"></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp <span class="keyword">drop</span> <span class="keyword">foreign</span> key fk_emp_dept_id;</span><br><span class="line"></span><br><span class="line"><span class="comment">--外键约束    删除更新行为</span></span><br><span class="line"><span class="keyword">no</span> action     当在父表中删除<span class="operator">/</span>更新对应记录时，首先检查该记录是否有对应外键，如果有则不允许删除<span class="operator">/</span>更新。（与 RESTRICT 一致)</span><br><span class="line">restrict      当在父表中删除<span class="operator">/</span>更新对应记录时，首先检查该记录是否有对应外键，如果有则不允许删除<span class="operator">/</span>更新。(与 NOACTION 一致)</span><br><span class="line">cascade       当在父表中删除<span class="operator">/</span>更新对应记录时，首先检查该记录是否有对应外键，如果有，则也删除<span class="operator">/</span>更新外键在子表中的记录。</span><br><span class="line"><span class="keyword">set</span> <span class="keyword">null</span>      当在父表中删除对应记录时，首先检查该记录是否有对应外键，如果有则设置子表中该外键值为<span class="keyword">null</span>(这就要求该外键允许取<span class="keyword">null</span>)。</span><br><span class="line"><span class="keyword">set</span> <span class="keyword">default</span>   父表有变更时，子表将外键列设置成一个默认的值(Innodb不支持)</span><br><span class="line">			  </span><br><span class="line">cascade</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp <span class="keyword">add</span> <span class="keyword">constraint</span> fk_emp_dept_id <span class="keyword">foreign</span> key(dept_id)  <span class="keyword">references</span> dept(id) <span class="keyword">on</span> <span class="keyword">update</span> cascade <span class="keyword">on</span> <span class="keyword">delete</span> cascade;</span><br><span class="line"><span class="keyword">set</span> <span class="keyword">null</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp <span class="keyword">add</span> <span class="keyword">constraint</span> fk_emp_dept_id <span class="keyword">foreign</span> key(dept_id)  <span class="keyword">references</span> dept(id) <span class="keyword">on</span> <span class="keyword">update</span> <span class="keyword">set</span> <span class="keyword">null</span> <span class="keyword">on</span> <span class="keyword">delete</span> <span class="keyword">set</span> <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="comment">--**********************************************************************************************</span></span><br><span class="line"><span class="comment">--多表查询</span></span><br><span class="line">·多表关系</span><br><span class="line">·多表查询概述</span><br><span class="line">·内连接</span><br><span class="line">·外连接</span><br><span class="line">·自连接</span><br><span class="line">·子查询</span><br><span class="line">·多表查询案例</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">多表关系</span><br><span class="line">概述</span><br><span class="line">项目开发中，在进行数据库表结构设计时，会根据业务需求及业务模块之间的关系，分析并设计表结构，由于业务之间相互关联，所</span><br><span class="line">以各个表结构之间也存在着各种联系，基本上分为三种：</span><br><span class="line"><span class="operator">&gt;</span><span class="number">1.</span>—对多(多对一)</span><br><span class="line"><span class="operator">&gt;</span><span class="number">2.</span>多对多</span><br><span class="line"><span class="operator">&gt;</span><span class="number">3.</span> 一对一</span><br><span class="line"></span><br><span class="line"><span class="number">1.</span>一对多（多对一）</span><br><span class="line">	<span class="operator">&gt;</span>案例:部门 与员工的关系</span><br><span class="line">	<span class="operator">&gt;</span>关系：一个部门对应多个员工，一个员工对应一个部门</span><br><span class="line">	<span class="operator">&gt;</span>实现：在多的一方建立外键，指向一的一方的主键</span><br><span class="line">	</span><br><span class="line"><span class="number">2.</span>多对多</span><br><span class="line">	案例：学生 与 课程的关系</span><br><span class="line">	<span class="operator">&gt;</span>关系：一个学生可以选修多门课程，一门课程也可以供多个学生选择</span><br><span class="line">	<span class="operator">&gt;</span>实现：建立第三张中间表，中间表至少包含两个外键，分别关联两方主键</span><br><span class="line">	</span><br><span class="line"><span class="number">3.</span>一对一</span><br><span class="line">	<span class="operator">&gt;</span>案例：用户 与 用户详情的关系</span><br><span class="line">	<span class="operator">&gt;</span> 关系：一对一关系，多用于单表拆分，将一张表的基础字段放在一张表中，其他详情字段放在另一张表中，以提升操作效率</span><br><span class="line">	<span class="operator">&gt;</span> 实现: 在任意一方加入外键，关联另外一方的主键，并且设置外键为唯一的(<span class="keyword">UNIQUE</span>)</span><br><span class="line">	</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp,dept;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp,dept <span class="keyword">where</span> emp.dept_id <span class="operator">=</span> dept.id;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--多表查询的分类</span></span><br><span class="line"><span class="number">1.</span>连接查询：</span><br><span class="line">        内连接：相当于查询A、B交集部分数据</span><br><span class="line">        外连接：</span><br><span class="line">        	左外连接：查询左表所有数据，以及两张表交集部分数据</span><br><span class="line">        	右外连接：查询右表所有数据，以及两张表交集部分数据</span><br><span class="line">        自连接：当前表与自身的连接查询，自连接必须使用表别名</span><br><span class="line"><span class="number">2.</span>子查询；</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--内连接</span></span><br><span class="line">    隐式内连接</span><br><span class="line">    <span class="keyword">select</span> 字段列表 <span class="keyword">from</span> 表<span class="number">1</span>,表<span class="number">2</span> <span class="keyword">where</span> 条件...(emp.dept_id <span class="operator">=</span> dept.id);</span><br><span class="line">    <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp,dept <span class="keyword">where</span> emp.dept_id <span class="operator">=</span> dept.id;</span><br><span class="line">    <span class="keyword">select</span> emp.name , dept.name <span class="keyword">from</span> emp,dept <span class="keyword">where</span> emp.dept_id <span class="operator">=</span> dept.id;</span><br><span class="line">    <span class="keyword">select</span> e.name , d.name <span class="keyword">from</span> emp e,dept d <span class="keyword">where</span> e.dept_id <span class="operator">=</span> d.id;</span><br><span class="line">    </span><br><span class="line">    显式内连接</span><br><span class="line">    <span class="keyword">select</span> 字段列表 <span class="keyword">from</span> 表<span class="number">1</span> <span class="keyword">inner</span> <span class="keyword">join</span> 表<span class="number">2</span> <span class="keyword">on</span> 连接条件...;</span><br><span class="line">    <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp e <span class="keyword">inner</span> <span class="keyword">join</span>  dept d <span class="keyword">on</span> e.dept_id <span class="operator">=</span> d.id;</span><br><span class="line">    <span class="keyword">select</span> emp.name , dept.name <span class="keyword">from</span> emp e <span class="keyword">inner</span> <span class="keyword">join</span>  dept d <span class="keyword">on</span> e.dept_id <span class="operator">=</span> d.id;</span><br><span class="line"><span class="comment">--外连接</span></span><br><span class="line">	左外连接  相当于查询左表的全部数据，包括表<span class="number">1</span>和表<span class="number">2</span>交集的数据</span><br><span class="line">	<span class="keyword">select</span> 字段列表 <span class="keyword">from</span> 表<span class="number">1</span> <span class="keyword">left</span> <span class="keyword">outer</span> <span class="keyword">join</span> 表<span class="number">2</span> <span class="keyword">on</span> 连接条件...;</span><br><span class="line">	<span class="keyword">select</span> e.<span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">left</span> <span class="keyword">outer</span> <span class="keyword">join</span> dept d <span class="keyword">on</span> e.dept_id<span class="operator">=</span>d.id;</span><br><span class="line">	<span class="keyword">select</span> e.<span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">left</span> <span class="keyword">join</span> dept d <span class="keyword">on</span> e.dept_id<span class="operator">=</span>d.id;</span><br><span class="line">	右外连接  相当于查询右表的全部数据，包括表<span class="number">1</span>和表<span class="number">2</span>交集的数据</span><br><span class="line">	<span class="keyword">select</span> 字段列表 <span class="keyword">from</span> 表<span class="number">1</span> <span class="keyword">right</span> <span class="keyword">outer</span> <span class="keyword">join</span> 表<span class="number">2</span> <span class="keyword">on</span> 连接条件...;</span><br><span class="line">	<span class="keyword">select</span> d.<span class="operator">*</span>,e.<span class="operator">*</span> <span class="keyword">from</span> emp e <span class="keyword">right</span> <span class="keyword">outer</span> <span class="keyword">join</span> dept d <span class="keyword">on</span> e.dept_id<span class="operator">=</span>d.id;</span><br><span class="line">	<span class="keyword">select</span> d.<span class="operator">*</span>,e.<span class="operator">*</span> <span class="keyword">from</span> emp e <span class="keyword">right</span> <span class="keyword">join</span> dept d <span class="keyword">on</span> e.dept_id<span class="operator">=</span>d.id;</span><br><span class="line">	<span class="operator">=</span></span><br><span class="line">	<span class="keyword">select</span> d.<span class="operator">*</span>,e.<span class="operator">*</span> <span class="keyword">from</span> dept d <span class="keyword">left</span> <span class="keyword">outer</span> <span class="keyword">join</span> emp e <span class="keyword">on</span> e.dept_id<span class="operator">=</span>d.id;</span><br><span class="line"></span><br><span class="line"><span class="comment">--自连接</span></span><br><span class="line">	不要看成一张表看成两张表</span><br><span class="line">	<span class="keyword">select</span> 字段列表 <span class="keyword">from</span> 表<span class="number">1</span> 别名<span class="number">1</span> <span class="keyword">join</span> 表<span class="number">1</span> 别名<span class="number">2</span> <span class="keyword">on</span> 条件...;</span><br><span class="line">	<span class="keyword">select</span> a.name , b.name <span class="keyword">from</span> emp a, emp b <span class="keyword">where</span> a, managerid <span class="operator">=</span> b.id;</span><br><span class="line">	<span class="keyword">select</span> a.name <span class="string">&#x27;员工&#x27;</span> ， b.name <span class="string">&#x27;领导&#x27;</span> <span class="keyword">from</span> emp a lef <span class="keyword">outer</span> <span class="keyword">join</span> emp b <span class="keyword">on</span> a.managerid <span class="operator">=</span>b.id;</span><br><span class="line"></span><br><span class="line">联合查询： <span class="keyword">union</span> <span class="keyword">union</span> <span class="keyword">all</span>  查询字段需一致(列数）</span><br><span class="line">	<span class="keyword">select</span> 字段列表 <span class="keyword">from</span> 表<span class="number">1.</span>..</span><br><span class="line">	<span class="keyword">union</span> <span class="keyword">all</span></span><br><span class="line">	<span class="keyword">select</span> 字段列表 <span class="keyword">from</span> 表<span class="number">2.</span>..;</span><br><span class="line">	</span><br><span class="line">	查询结果合并</span><br><span class="line">	<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> salary <span class="operator">&lt;</span> <span class="number">5000</span></span><br><span class="line">	<span class="keyword">union</span> <span class="keyword">all</span></span><br><span class="line">	<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp age <span class="operator">&gt;</span> <span class="number">50</span>;</span><br><span class="line">	</span><br><span class="line">	查询结果合并去重</span><br><span class="line">	<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> salary <span class="operator">&lt;</span> <span class="number">5000</span></span><br><span class="line">	<span class="keyword">union</span></span><br><span class="line">	<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp age <span class="operator">&gt;</span> <span class="number">50</span>;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line"><span class="comment">--子查询 嵌套查询</span></span><br><span class="line">概念：<span class="keyword">SQL</span>语句中嵌套<span class="keyword">SELECT</span>语句，称为嵌套查询，又称子查询。</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t1 <span class="keyword">WHERE</span> column1<span class="operator">=</span>(<span class="keyword">SELECT</span> column1 <span class="keyword">FROM</span> t2);</span><br><span class="line"></span><br><span class="line">子查询外部的语句可以是<span class="keyword">INSERT</span><span class="operator">/</span><span class="keyword">UPDATE</span><span class="operator">/</span> <span class="keyword">DELETE</span><span class="operator">/</span> <span class="keyword">SELECT</span>的任何一个。</span><br><span class="line">根据子查询结果不同，分为：</span><br><span class="line"><span class="operator">&gt;</span>标量子查询（子查询结果为单个值）</span><br><span class="line"><span class="operator">&gt;</span>列子查询（子查询结果为一列</span><br><span class="line"><span class="operator">&gt;</span>行子查询（子查询结果为一行)</span><br><span class="line">表子查询（子查询结果为多行多列)</span><br><span class="line">根据子查询位置，分为：<span class="keyword">WHERE</span>之后、<span class="keyword">FROM</span>之后、<span class="keyword">SELECT</span>之后。</span><br><span class="line"></span><br><span class="line"><span class="operator">&gt;</span>标量子查询（子查询结果为单个值）</span><br><span class="line">子查询结果为单个值，数字，字符串，日期，最简单的形式</span><br><span class="line">常用操作符: <span class="operator">=</span> <span class="operator">&lt;&gt;</span> <span class="operator">&gt;</span> <span class="operator">&gt;=</span> <span class="operator">&lt;</span> <span class="operator">&lt;=</span></span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> dept <span class="keyword">where</span> name <span class="operator">=</span><span class="string">&#x27;销售部&#x27;</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> dept_id <span class="operator">=</span><span class="number">4</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> dept_id <span class="operator">=</span>(<span class="keyword">select</span> id <span class="keyword">from</span> dept <span class="keyword">where</span> name <span class="operator">=</span><span class="string">&#x27;销售部&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> entrydate <span class="keyword">from</span> emp <span class="keyword">where</span>  name <span class="operator">=</span> <span class="string">&#x27;Aminn&#x27;</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>  emp entrydate <span class="operator">&gt;</span><span class="string">&#x27;2009-02-10&#x27;</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>  emp entrydate <span class="operator">&gt;</span>(<span class="keyword">select</span> entrydate <span class="keyword">from</span> emp <span class="keyword">where</span> name <span class="operator">=</span> <span class="string">&#x27;Aminn&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="operator">&gt;</span>列子查询（子查询结果为一列</span><br><span class="line">常用操作符:<span class="keyword">IN</span> <span class="keyword">NOT</span> <span class="keyword">IN</span> <span class="keyword">AND</span> <span class="keyword">SOME</span> <span class="keyword">ALL</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">IN</span>		在指定的集合范围之内，多选一</span><br><span class="line"><span class="keyword">NOT</span> <span class="keyword">IN</span>	不在指定的集合范围之内</span><br><span class="line"><span class="keyword">ANY</span>		子查询返回列表中，有任意一个满足即可</span><br><span class="line"><span class="keyword">SOME</span>	与<span class="keyword">ANY</span>等同，使用<span class="keyword">SOME</span>的地方都可以使用<span class="keyword">ANY</span></span><br><span class="line"><span class="keyword">ALL</span>		子查询返回列表的所有值都必须满足</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> dept <span class="keyword">where</span> name <span class="operator">=</span><span class="string">&#x27;销售部&#x27;</span> <span class="keyword">or</span> name <span class="operator">=</span><span class="string">&#x27;市场部&#x27;</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> dept_id <span class="keyword">in</span> (<span class="number">2</span>,<span class="number">4</span>);</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> dept_id <span class="keyword">in</span> (<span class="keyword">select</span> id <span class="keyword">from</span> dept <span class="keyword">where</span> name <span class="operator">=</span><span class="string">&#x27;销售部&#x27;</span> <span class="keyword">or</span> name <span class="operator">=</span><span class="string">&#x27;市场部&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> dept <span class="keyword">where</span> name <span class="operator">=</span><span class="string">&#x27;销售部&#x27;</span>;</span><br><span class="line"><span class="keyword">select</span> salary <span class="keyword">from</span> emp <span class="keyword">where</span> dept_id <span class="operator">=</span> <span class="number">3</span>;</span><br><span class="line"><span class="keyword">select</span> salary <span class="keyword">from</span> emp <span class="keyword">where</span> dept_id <span class="operator">=</span> (<span class="keyword">select</span> id <span class="keyword">from</span> dept <span class="keyword">where</span> name <span class="operator">=</span><span class="string">&#x27;销售部&#x27;</span>);</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> salary <span class="operator">&gt;</span> <span class="keyword">all</span>(<span class="keyword">select</span> salary <span class="keyword">from</span> emp <span class="keyword">where</span> dept_id <span class="operator">=</span> (<span class="keyword">select</span> id <span class="keyword">from</span> dept <span class="keyword">where</span> name <span class="operator">=</span><span class="string">&#x27;销售部&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> dept <span class="keyword">where</span> name <span class="operator">=</span><span class="string">&#x27;销售部&#x27;</span>;</span><br><span class="line"><span class="keyword">select</span> salary <span class="keyword">from</span> emp <span class="keyword">where</span> dept_id <span class="operator">=</span> <span class="number">3</span>;</span><br><span class="line"><span class="keyword">select</span> salary <span class="keyword">from</span> emp <span class="keyword">where</span> dept_id <span class="operator">=</span> (<span class="keyword">select</span> id <span class="keyword">from</span> dept <span class="keyword">where</span> name <span class="operator">=</span><span class="string">&#x27;销售部&#x27;</span>);</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> salary <span class="operator">&gt;</span> <span class="keyword">any</span>(<span class="keyword">select</span> salary <span class="keyword">from</span> emp <span class="keyword">where</span> dept_id <span class="operator">=</span> (<span class="keyword">select</span> id <span class="keyword">from</span> dept <span class="keyword">where</span> name <span class="operator">=</span><span class="string">&#x27;销售部&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="operator">&gt;</span>行子查询（子查询结果为一行)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">事务:</span><br><span class="line">事务简介</span><br><span class="line">事务操作</span><br><span class="line">事务四大特性</span><br><span class="line">并发事务问题</span><br><span class="line">事务隔离级别</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">事务简介</span><br><span class="line">事务 是一组操作的集合，它是一个不可分割的工作单位，事务会把所有的操作作为一个整体一起向系统提交或撤销操作</span><br><span class="line">请求，即这些操作要么同时成功，要么同时失败。</span><br><span class="line"></span><br><span class="line">默认MySQL的事务是自动提交的，也就是说，当执行一条DML语句，MySQL会立即隐式的提交事务。</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> account <span class="keyword">where</span> name <span class="operator">=</span><span class="string">&#x27;zs&#x27;</span>;</span><br><span class="line"><span class="keyword">update</span> account <span class="keyword">set</span> money <span class="operator">=</span> money <span class="operator">-</span> <span class="number">1000</span> <span class="keyword">where</span> name <span class="operator">=</span><span class="string">&#x27;zs&#x27;</span>;</span><br><span class="line"><span class="keyword">update</span> account <span class="keyword">set</span> money <span class="operator">=</span> money <span class="operator">+</span> <span class="number">1000</span> <span class="keyword">where</span> name <span class="operator">=</span><span class="string">&#x27;ls&#x27;</span>;</span><br><span class="line"></span><br><span class="line">事务操作</span><br><span class="line">	查看<span class="operator">/</span>设置事务提交方式 </span><br><span class="line">	<span class="keyword">SELECT</span>@<span class="variable">@autocommit</span>；</span><br><span class="line">	<span class="number">0</span>：手动提交</span><br><span class="line">	<span class="number">1</span>：自动提交</span><br><span class="line">	<span class="keyword">SET</span>@<span class="variable">@autocommit</span><span class="operator">=</span><span class="number">0</span>;</span><br><span class="line">	提交事务</span><br><span class="line">	<span class="keyword">COMMIT</span>;</span><br><span class="line">	回滚事务</span><br><span class="line">	<span class="keyword">ROLLBACK</span>；</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> account <span class="keyword">where</span> name <span class="operator">=</span><span class="string">&#x27;zs&#x27;</span>;</span><br><span class="line"><span class="keyword">update</span> account <span class="keyword">set</span> money <span class="operator">=</span> money <span class="operator">-</span> <span class="number">1000</span> <span class="keyword">where</span> name <span class="operator">=</span><span class="string">&#x27;zs&#x27;</span>;</span><br><span class="line"><span class="keyword">update</span> account <span class="keyword">set</span> money <span class="operator">=</span> money <span class="operator">+</span> <span class="number">1000</span> <span class="keyword">where</span> name <span class="operator">=</span><span class="string">&#x27;ls&#x27;</span>;</span><br><span class="line"><span class="keyword">commit</span>;</span><br><span class="line"></span><br><span class="line">开启事务</span><br><span class="line">	<span class="keyword">START</span> TRANSACTION 或<span class="keyword">BEGIN</span>&#125;</span><br><span class="line">	提交事务</span><br><span class="line">	<span class="keyword">COMMIT</span>;</span><br><span class="line">	回滚事务</span><br><span class="line">	<span class="keyword">ROLLBACK</span>；</span><br><span class="line"></span><br><span class="line"><span class="keyword">start</span> transaction;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> account <span class="keyword">where</span> name <span class="operator">=</span><span class="string">&#x27;zs&#x27;</span>;</span><br><span class="line"><span class="keyword">update</span> account <span class="keyword">set</span> money <span class="operator">=</span> money <span class="operator">-</span> <span class="number">1000</span> <span class="keyword">where</span> name <span class="operator">=</span><span class="string">&#x27;zs&#x27;</span>;</span><br><span class="line"><span class="keyword">update</span> account <span class="keyword">set</span> money <span class="operator">=</span> money <span class="operator">+</span> <span class="number">1000</span> <span class="keyword">where</span> name <span class="operator">=</span><span class="string">&#x27;ls&#x27;</span>;</span><br><span class="line"><span class="keyword">commit</span>;</span><br><span class="line"><span class="keyword">rollback</span>;</span><br><span class="line"></span><br><span class="line">事务四大特性 ACID</span><br><span class="line">原子性（Atomicity)：	事务是不可分割的最小操作单元，要么全部成功，要么全部失败。</span><br><span class="line">一致性（<span class="operator">&amp;</span>onsistency）：	事务完成时，必须使所有的数据都保持一致状态。</span><br><span class="line">隔离性（Isolation）：	数据库系统提供的隔离机制，保证事务在不受外部并发操作影响的独立环境下运行。</span><br><span class="line">持久性（Durability)：	事务一旦提交或回滚，它对数据库中的数据的改变就是永久的。</span><br><span class="line"></span><br><span class="line">并发事务问题</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">事务隔离级别</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Mysql/" rel="tag">Mysql</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-Vue工程组件通信"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/blog/2024/02/09/Vue%E5%B7%A5%E7%A8%8B%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/"
+    >Vue组件间通信实践</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/blog/2024/02/09/Vue%E5%B7%A5%E7%A8%8B%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/" class="article-date">
+  <time datetime="2024-02-09T14:46:41.000Z" itemprop="datePublished">2024-02-09</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="Vue组件间通信实践"><a href="#Vue组件间通信实践" class="headerlink" title="Vue组件间通信实践"></a>Vue组件间通信实践</h1><p>在Vue中，组件间的通信是构建复杂应用的关键。本教程将通过几个简单的例子来展示如何在Vue组件之间传递数据和方法。</p>
+<h2 id="defineProps和defineEmits的作用"><a href="#defineProps和defineEmits的作用" class="headerlink" title="defineProps和defineEmits的作用"></a>defineProps和defineEmits的作用</h2><p>在Vue 3中，<code>defineProps</code>和<code>defineEmits</code>是Composition API的一部分，它们用于在组件中声明props（接收来自父组件的数据）和emits（触发事件传递给父组件）。</p>
+<h3 id="defineProps"><a href="#defineProps" class="headerlink" title="defineProps"></a>defineProps</h3><p><code>defineProps</code>用于声明组件接收的props。它允许你定义一个接口，指定哪些属性将作为props传递给组件。这有助于提供类型检查和自动完成功能，使得组件的props使用更加清晰和安全。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; defineProps &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> props = <span class="title function_">defineProps</span>(&#123;</span><br><span class="line">  <span class="comment">// 定义一个名为 &#x27;message&#x27; 的 prop，类型为 String</span></span><br><span class="line">  <span class="attr">message</span>: <span class="title class_">String</span>,</span><br><span class="line">  <span class="comment">// 定义一个名为 &#x27;age&#x27; 的 prop，类型为 Number，可选，默认值为 18</span></span><br><span class="line">  <span class="attr">age</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="title class_">Number</span>,</span><br><span class="line">    <span class="attr">default</span>: <span class="number">18</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 定义一个名为 &#x27;isStudent&#x27; 的 prop，类型为 Boolean</span></span><br><span class="line">  <span class="attr">isStudent</span>: <span class="title class_">Boolean</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>在上面的例子中，<code>props</code>是一个响应式引用，你可以在组件的其他地方使用它来访问这些props。</p>
+<h3 id="defineEmits"><a href="#defineEmits" class="headerlink" title="defineEmits"></a>defineEmits</h3><p><code>defineEmits</code>用于声明组件可以触发的事件（emits）。这允许你在组件内部定义可以被父组件监听的事件。与<code>defineProps</code>类似，它也提供了类型检查和自动完成的功能。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; defineEmits &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> emits = <span class="title function_">defineEmits</span>(&#123;</span><br><span class="line">  <span class="comment">// 定义一个名为 &#x27;update:name&#x27; 的事件</span></span><br><span class="line">  <span class="comment">// 当这个事件被触发时，它将传递一个名为 &#x27;name&#x27; 的参数</span></span><br><span class="line">  <span class="string">&#x27;update:name&#x27;</span>: <span class="function">(<span class="params">name: string</span>) =&gt;</span> <span class="literal">true</span>,</span><br><span class="line">  <span class="comment">// 定义一个名为 &#x27;delete&#x27; 的事件，没有参数</span></span><br><span class="line">  <span class="string">&#x27;delete&#x27;</span>: <span class="function">() =&gt;</span> <span class="literal">true</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>在上面的例子中，<code>emits</code>是一个对象，它描述了组件可以触发的事件。你可以在组件内部使用<code>emits</code>来触发这些事件。</p>
+<h2 id="父子组件通信"><a href="#父子组件通信" class="headerlink" title="父子组件通信"></a>父子组件通信</h2><h3 id="父组件传递数据和方法给子组件"><a href="#父组件传递数据和方法给子组件" class="headerlink" title="父组件传递数据和方法给子组件"></a>父组件传递数据和方法给子组件</h3><p>在父组件中，我们定义了一些数据和方法，并通过props传递给子组件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;div @click=&quot;props.viewFun&quot;&gt;***main组件***&lt;/div&gt;</span><br><span class="line">    &lt;hello-world</span><br><span class="line">      :fuData=&quot;fuData&quot;</span><br><span class="line">      :fuFunc=&quot;fuFunc&quot;</span><br><span class="line">      @child-event=&quot;receiveCh&quot;</span><br><span class="line">    &gt;&lt;/hello-world&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup lang=&quot;ts&quot;&gt;</span><br><span class="line">import HelloWorld from &quot;@/components/HelloWorld.vue&quot;;</span><br><span class="line"></span><br><span class="line">// 定义数据和方法</span><br><span class="line">const fuData = &quot;main数据&quot;;</span><br><span class="line">const fuFunc = (i: any) =&gt; &#123;</span><br><span class="line">  console.log(&quot;main组件的方法&quot;, i);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 子组件触发的事件处理</span><br><span class="line">const receiveCh = () =&gt; &#123;</span><br><span class="line">  console.log(&quot;main组件的方法被调用了&quot;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 使用defineProps定义props</span><br><span class="line">import &#123; defineProps &#125; from &quot;vue&quot;;</span><br><span class="line">const props = defineProps([&quot;viewFun&quot;]);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="子组件调用父组件的方法"><a href="#子组件调用父组件的方法" class="headerlink" title="子组件调用父组件的方法"></a>子组件调用父组件的方法</h3><p>在子组件中，我们可以通过<code>emit</code>来触发父组件的方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div @click=&quot;chFunc&quot;&gt;---hello组件---&lt;/div&gt;</span><br><span class="line">  &lt;div @click=&quot;fuFunc(111)&quot;&gt;&#123;&#123; fuData &#125;&#125;&lt;/div&gt;</span><br><span class="line">  &lt;div&gt;&#123;&#123; viewData &#125;&#125;&lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup lang=&quot;ts&quot;&gt;</span><br><span class="line">// 使用defineProps接收父组件传递的数据和方法</span><br><span class="line">import &#123; defineProps &#125; from &quot;vue&quot;;</span><br><span class="line">interface Props &#123;</span><br><span class="line">  fuData?: String;</span><br><span class="line">  fuFunc?: Function | any;</span><br><span class="line">&#125;</span><br><span class="line">defineProps&lt;Props&gt;();</span><br><span class="line"></span><br><span class="line">// 使用defineEmits定义子组件触发的事件</span><br><span class="line">import &#123; defineEmits &#125; from &quot;vue&quot;;</span><br><span class="line">const emit = defineEmits([&quot;child-event&quot;]);</span><br><span class="line">const chFunc = (data: any) =&gt; &#123;</span><br><span class="line">  emit(&quot;child-event&quot;, data);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 使用inject接收父组件通过provide注入的数据</span><br><span class="line">import &#123; inject, Ref, ref &#125; from &quot;vue&quot;;</span><br><span class="line">const viewData = inject&lt;Ref&lt;number&gt;&gt;(&quot;view&quot;, ref(0));</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="跨层级组件通信"><a href="#跨层级组件通信" class="headerlink" title="跨层级组件通信"></a>跨层级组件通信</h2><h3 id="使用provide-inject"><a href="#使用provide-inject" class="headerlink" title="使用provide&#x2F;inject"></a>使用provide&#x2F;inject</h3><p>在Vue 3中，我们可以使用<code>provide</code>和<code>inject</code>来实现跨层级组件的通信。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;div&gt;@@@页面@@@&lt;/div&gt;</span><br><span class="line">    &lt;main-layout :view-fun=&quot;viewFun&quot;&gt;&lt;/main-layout&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup lang=&quot;ts&quot;&gt;</span><br><span class="line">import MainLayout from &quot;@/components/MainLayout.vue&quot;;</span><br><span class="line"></span><br><span class="line">// 在父组件中provide数据</span><br><span class="line">import &#123; provide &#125; from &quot;vue&quot;;</span><br><span class="line">provide(&quot;view&quot;, &quot;provide注入数据&quot;);</span><br><span class="line"></span><br><span class="line">// 在子组件中inject数据</span><br><span class="line">const viewFun = () =&gt; &#123;</span><br><span class="line">  console.log(&quot;页面加载&quot;);</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Vue/" rel="tag">Vue</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-CentOS安装配置Nginx"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/blog/2024/02/09/CentOS%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AENginx/"
+    >CentOS安装配置Nginx</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/blog/2024/02/09/CentOS%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AENginx/" class="article-date">
+  <time datetime="2024-02-09T14:44:57.000Z" itemprop="datePublished">2024-02-09</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="CentOS上安装与配置Nginx"><a href="#CentOS上安装与配置Nginx" class="headerlink" title="CentOS上安装与配置Nginx"></a>CentOS上安装与配置Nginx</h1><p>Nginx是一款轻量级的Web服务器&#x2F;反向代理服务器及电子邮件（IMAP&#x2F;POP3）代理服务器，并在一个BSD-like协议下发行。以下是在CentOS系统上安装和配置Nginx的步骤。</p>
+<h2 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h2><p>在开始之前，确保你的系统已经更新到最新版本，并且网络连接正常。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查网络连接</span></span><br><span class="line">ping www.baidu.com</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">更新系统源</span></span><br><span class="line">sudo yum update</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-安装编译环境"><a href="#2-安装编译环境" class="headerlink" title="2. 安装编译环境"></a>2. 安装编译环境</h2><p>Nginx需要编译安装，因此需要先安装编译环境和一些必要的库。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装编译工具</span></span><br><span class="line">sudo yum -y install gcc</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装PCRE库</span></span><br><span class="line">sudo yum -y install pcre pcre-devel</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装Zlib库</span></span><br><span class="line">sudo yum -y install zlib zlib-devel</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装OpenSSL库</span></span><br><span class="line">sudo yum -y install openssl openssl-devel</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装wget工具</span></span><br><span class="line">sudo yum -y install wget</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-下载与安装Nginx"><a href="#3-下载与安装Nginx" class="headerlink" title="3. 下载与安装Nginx"></a>3. 下载与安装Nginx</h2><p>从Nginx官网下载最新的稳定版本。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下载Nginx安装包</span></span><br><span class="line">wget http://nginx.org/download/nginx-1.9.9.tar.gz</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解压安装包</span></span><br><span class="line">tar -zxvf nginx-1.9.9.tar.gz</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入解压后的目录</span></span><br><span class="line">cd nginx-1.9.9</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置Nginx</span></span><br><span class="line">./configure</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编译并安装Nginx</span></span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-运行Nginx"><a href="#4-运行Nginx" class="headerlink" title="4. 运行Nginx"></a>4. 运行Nginx</h2><p>安装完成后，Nginx的二进制文件将位于<code>/usr/local/nginx/sbin/</code>目录下。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">切换到Nginx安装目录</span></span><br><span class="line">cd /usr/local/nginx/sbin</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动Nginx</span></span><br><span class="line">sudo ./nginx</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-检查Nginx运行状态"><a href="#5-检查Nginx运行状态" class="headerlink" title="5. 检查Nginx运行状态"></a>5. 检查Nginx运行状态</h2><p>确认Nginx是否成功运行。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看Nginx进程</span></span><br><span class="line">ps -ef | grep nginx</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-配置Nginx"><a href="#6-配置Nginx" class="headerlink" title="6. 配置Nginx"></a>6. 配置Nginx</h2><p>编辑Nginx的配置文件，通常位于<code>/usr/local/nginx/conf/nginx.conf</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"># 用户配置</span><br><span class="line">user  nobody;</span><br><span class="line"></span><br><span class="line"># 工作进程数</span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line"># 错误日志和PID文件</span><br><span class="line">error_log  logs/error.log;</span><br><span class="line">pid        logs/nginx.pid;</span><br><span class="line"></span><br><span class="line"># 事件配置</span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># HTTP服务器配置</span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    # 日志配置</span><br><span class="line">    access_log  logs/access.log  main;</span><br><span class="line"></span><br><span class="line">    # 性能优化</span><br><span class="line">    sendfile        on;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    # Gzip压缩</span><br><span class="line">    gzip  on;</span><br><span class="line"></span><br><span class="line">    # 虚拟主机配置</span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            root   /usr/local/nginx/html;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        # 错误页面配置</span><br><span class="line">        error_page   500 502 503 504  /50x.html;</span><br><span class="line">        location = /50x.html &#123;</span><br><span class="line">            root   /usr/local/nginx/html;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-重启Nginx"><a href="#7-重启Nginx" class="headerlink" title="7. 重启Nginx"></a>7. 重启Nginx</h2><p>配置完成后，重启Nginx使配置生效。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">停止Nginx</span></span><br><span class="line">sudo /usr/local/nginx/sbin/nginx -s stop</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动Nginx</span></span><br><span class="line">sudo /usr/local/nginx/sbin/nginx</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-验证安装"><a href="#8-验证安装" class="headerlink" title="8. 验证安装"></a>8. 验证安装</h2><p>在浏览器中输入服务器的IP地址，如果看到Nginx的欢迎页面，说明安装成功。</p>
+<hr>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/CentOS/" rel="tag">CentOS</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-Vue接入百度地图"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/blog/2024/02/09/Vue%E6%8E%A5%E5%85%A5%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE/"
+    >Vue接入百度地图</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/blog/2024/02/09/Vue%E6%8E%A5%E5%85%A5%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE/" class="article-date">
+  <time datetime="2024-02-09T14:42:47.000Z" itemprop="datePublished">2024-02-09</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="vue3接入百度地图的基本步骤及代码实现"><a href="#vue3接入百度地图的基本步骤及代码实现" class="headerlink" title="vue3接入百度地图的基本步骤及代码实现:"></a>vue3接入百度地图的基本步骤及代码实现:</h2><p>以下是使用vue3接入百度地图的基本步骤及代码实现：</p>
+<ol>
+<li>引入百度地图API</li>
+</ol>
+<p>在页面头部引入百度地图API</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://api.map.baidu.com/api?v=3.0&amp;ak=您的密钥&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>ak</code> 是您的百度地图 API 密钥。如果您还没有密钥，可以在 <a target="_blank" rel="noopener" href="https://lbsyun.baidu.com/index.php?title=jspopular3.0/guide/getkey">这里</a> 进行申请。</p>
+<ol start="2">
+<li>在 vue3 组件中创建地图</li>
+</ol>
+<p>在 <code>mounted</code> 钩子函数中创建地图实例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">mounted</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> map = <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Map</span>(<span class="string">&quot;map-container&quot;</span>);  </span><br><span class="line">    <span class="comment">//开始初始地图 </span></span><br><span class="line">    map.<span class="title function_">centerAndZoom</span>(<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Point</span>(<span class="number">116.404</span>, <span class="number">39.915</span>), <span class="number">11</span>);</span><br><span class="line">    <span class="comment">// 开启鼠标滚轮缩放</span></span><br><span class="line">    map.<span class="title function_">enableScrollWheelZoom</span>(<span class="literal">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>map-container</code> 是在页面中预设的地图容器。</p>
+<ol start="3">
+<li>添加标注</li>
+</ol>
+<p>在地图中添加标注，示例代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建标注</span></span><br><span class="line"><span class="keyword">const</span> marker = <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Marker</span>(<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Point</span>(<span class="number">116.404</span>, <span class="number">39.915</span>));</span><br><span class="line"><span class="comment">// 添加标注到地图</span></span><br><span class="line">map.<span class="title function_">addOverlay</span>(marker);</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>获取当前位置</li>
+</ol>
+<p>获取当前位置并在地图中进行显示</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定位当前位置</span></span><br><span class="line"><span class="keyword">var</span> geolocation = <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Geolocation</span>();</span><br><span class="line">geolocation.<span class="title function_">getCurrentPosition</span>(<span class="keyword">function</span>(<span class="params">r</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="title function_">getStatus</span>() == <span class="variable constant_">BMAP_STATUS_SUCCESS</span>)&#123;</span><br><span class="line">        <span class="comment">// 显示当前位置</span></span><br><span class="line">        map.<span class="title function_">panTo</span>(r.<span class="property">point</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="title function_">alert</span>(<span class="string">&#x27;failed&#x27;</span>+<span class="variable language_">this</span>.<span class="title function_">getStatus</span>());</span><br><span class="line">    &#125;        </span><br><span class="line">&#125;,&#123;<span class="attr">enableHighAccuracy</span>: <span class="literal">true</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>至此，您就可以在您的 vue3 项目中集成百度地图了。</p>
+<p>完整代码示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-card</span> <span class="attr">style</span>=<span class="string">&quot;height: calc(100vh - 80px);&quot;</span> <span class="attr">shadow</span>=<span class="string">&quot;hover&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;map-container&quot;</span> <span class="attr">style</span>=<span class="string">&quot;width: 100%; height: 640px;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">el-card</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="language-javascript">  <span class="title function_">mounted</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//开始初始地图</span></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// eslint-disable-next-line no-undef</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> map = <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Map</span>(<span class="string">&quot;map-container&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// 设置中心点和缩放级别</span></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// eslint-disable-next-line no-undef</span></span></span><br><span class="line"><span class="language-javascript">    map.<span class="title function_">centerAndZoom</span>(<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Point</span>(<span class="number">116.404</span>, <span class="number">39.915</span>), <span class="number">11</span>);</span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// 添加控件，如缩放控件</span></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// eslint-disable-next-line no-undef</span></span></span><br><span class="line"><span class="language-javascript">    map.<span class="title function_">addControl</span>(<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">NavigationControl</span>());</span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// 开启鼠标滚轮缩放</span></span></span><br><span class="line"><span class="language-javascript">    map.<span class="title function_">enableScrollWheelZoom</span>(<span class="literal">true</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// 定位当前位置</span></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// eslint-disable-next-line no-undef</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> geolocation = <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Geolocation</span>();</span></span><br><span class="line"><span class="language-javascript">    geolocation.<span class="title function_">getCurrentPosition</span>(<span class="keyword">function</span> (<span class="params">r</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="title function_">getStatus</span>() == <span class="number">0</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// eslint-disable-next-line no-undef</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> point = <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Point</span>(r.<span class="property">point</span>.<span class="property">lng</span>, r.<span class="property">point</span>.<span class="property">lat</span>);</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// eslint-disable-next-line no-undef</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> marker = <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Marker</span>(point);</span></span><br><span class="line"><span class="language-javascript">        map.<span class="title function_">addOverlay</span>(marker);</span></span><br><span class="line"><span class="language-javascript">        map.<span class="title function_">panTo</span>(point); <span class="comment">// 显示当前位置</span></span></span><br><span class="line"><span class="language-javascript">      &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;);</span></span><br><span class="line"><span class="language-javascript">  &#125;,</span></span><br><span class="line"><span class="language-javascript">&#125;;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Vue/" rel="tag">Vue</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-CentOS如何安装Redis"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/blog/2024/02/01/CentOS%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85Redis/"
+    >CentOS如何安装Redis</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/blog/2024/02/01/CentOS%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85Redis/" class="article-date">
+  <time datetime="2024-02-01T15:33:25.000Z" itemprop="datePublished">2024-02-01</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="CentOS系统上安装Redis操作教程"><a href="#CentOS系统上安装Redis操作教程" class="headerlink" title="CentOS系统上安装Redis操作教程"></a>CentOS系统上安装Redis操作教程</h1><p>Redis（Remote Dictionary Server）是一个开源的，基于内存的高性能键值对（NoSQL）数据库。它支持多种类型的数据结构，如字符串（strings）、列表（lists）、集合（sets）、有序集合（sorted sets）、哈希（hashes）、位图（bitmaps）、超日志（hyperloglogs）和地理空间（geospatial）索引半径查询。Redis因其出色的性能、可扩展性和广泛的功能集而广受欢迎。</p>
+<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>在开始安装Redis之前，确保你的CentOS系统已经安装了必要的依赖项，并且系统是最新的。这有助于避免在安装过程中遇到不必要的问题。</p>
+<ol>
+<li><p><strong>更新系统</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum update</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>安装编译工具</strong>：<br>除了<code>gcc</code>，你可能还需要安装<code>make</code>和<code>tcl</code>，因为它们是编译Redis的依赖项。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y gcc make tcl</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="下载Redis"><a href="#下载Redis" class="headerlink" title="下载Redis"></a>下载Redis</h2><ol start="3">
+<li><p><strong>下载Redis</strong>：<br>选择一个稳定的Redis版本进行下载。这里我们以6.2.6版本为例。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://download.redis.io/releases/redis-6.2.6.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>解压下载的压缩包</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf redis-6.2.6.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>进入Redis目录</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd redis-6.2.6/</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="编译安装Redis"><a href="#编译安装Redis" class="headerlink" title="编译安装Redis"></a>编译安装Redis</h2><ol start="6">
+<li><p><strong>编译Redis</strong>：<br>在Redis目录中，执行编译命令。这将自动检测系统环境并编译Redis。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>安装Redis</strong>：<br>使用<code>make install</code>命令将Redis安装到指定目录。这里我们选择<code>/usr/local/redis</code>作为安装目录。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo make install PREFIX=/usr/local/redis</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="配置Redis"><a href="#配置Redis" class="headerlink" title="配置Redis"></a>配置Redis</h2><ol start="8">
+<li><p><strong>创建Redis配置文件目录</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /etc/redis</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>复制配置文件</strong>：<br>将默认的配置文件复制到<code>/etc/redis</code>目录。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp redis.conf /etc/redis/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>编辑配置文件</strong>：<br>使用文本编辑器（如<code>vi</code>或<code>nano</code>）编辑配置文件，根据需要调整设置。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/redis/redis.conf</span><br></pre></td></tr></table></figure>
+
+<p>例如，你可以设置<code>bind</code>指令来限制Redis服务的访问，或者调整内存使用策略等。</p>
+</li>
+</ol>
+<h2 id="启动Redis服务"><a href="#启动Redis服务" class="headerlink" title="启动Redis服务"></a>启动Redis服务</h2><ol start="11">
+<li><p><strong>启动Redis</strong>：<br>使用以下命令启动Redis服务。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/redis/bin/redis-server /etc/redis/redis.conf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看进程来确定redis是否启动成功，非必须</span></span><br><span class="line">ps -ef |grep redis</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p><strong>设置Redis开机自启</strong>：<br>创建一个systemd服务文件来管理Redis服务。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/systemd/system/redis.service</span><br></pre></td></tr></table></figure>
+
+<p>在文件中添加以下内容（请根据实际情况修改<code>ExecStart</code>路径）：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Unit]</span></span><br><span class="line"><span class="attr">Description</span>=Redis In-Memory Data Store</span><br><span class="line"><span class="attr">After</span>=network.target</span><br><span class="line"></span><br><span class="line"><span class="section">[Service]</span></span><br><span class="line"><span class="attr">User</span>=redis</span><br><span class="line"><span class="attr">Group</span>=redis</span><br><span class="line"><span class="attr">ExecStart</span>=/usr/local/redis/bin/redis-server /etc/redis/redis.conf</span><br><span class="line"><span class="attr">ExecStop</span>=/usr/local/redis/bin/redis-cli shutdown</span><br><span class="line"><span class="attr">PrivateTmp</span>=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="section">[Install]</span></span><br><span class="line"><span class="attr">WantedBy</span>=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p>保存并退出编辑器。</p>
+</li>
+<li><p><strong>启用Redis服务</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl enable redis.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>启动Redis服务</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start redis.service</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="验证Redis安装"><a href="#验证Redis安装" class="headerlink" title="验证Redis安装"></a>验证Redis安装</h2><ol start="15">
+<li><p><strong>检查Redis服务状态</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl status redis.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>测试Redis</strong>：<br>使用Redis命令行客户端测试服务。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/redis/bin/redis-cli</span><br></pre></td></tr></table></figure>
+
+<p>在客户端中，尝试执行一些基本命令，如<code>set</code>和<code>get</code>，来验证Redis是否正常工作。</p>
+</li>
+</ol>
+<h2 id="停止和重启Redis服务"><a href="#停止和重启Redis服务" class="headerlink" title="停止和重启Redis服务"></a>停止和重启Redis服务</h2><ol start="17">
+<li><p><strong>停止Redis服务</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl stop redis.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>重启Redis服务</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart redis.service</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="卸载Redis服务"><a href="#卸载Redis服务" class="headerlink" title="卸载Redis服务"></a>卸载Redis服务</h2><ol start="19">
+<li><p><strong>停止并禁用Redis服务</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl stop redis.service</span><br><span class="line">sudo systemctl disable redis.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>删除Redis服务文件</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rm /etc/systemd/system/redis.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>删除Redis安装目录</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rm -rf /usr/local/redis</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>清理Redis配置文件</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rm /etc/redis/redis.conf</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>在执行上述步骤时，请确保你有足够的权限来执行系统命令。如果你不是root用户，你可能需要在命令前加上<code>sudo</code>来获取必要的权限。此外，建议在进行任何更改之前备份你的系统或相关文件。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Redis/" rel="tag">Redis</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-义乌"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/blog/2024/01/15/%E4%B9%89%E4%B9%8C/"
+    >义乌</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/blog/2024/01/15/%E4%B9%89%E4%B9%8C/" class="article-date">
+  <time datetime="2024-01-15T13:22:14.000Z" itemprop="datePublished">2024-01-15</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E6%97%85%E8%A1%8C/">旅行</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><img src="/blog/image/%E4%B9%89%E4%B9%8C/1.jpg" alt="义乌"></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E6%97%85%E8%A1%8C/" rel="tag">旅行</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-杭州"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/blog/2024/01/13/%E6%9D%AD%E5%B7%9E/"
+    >杭州</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/blog/2024/01/13/%E6%9D%AD%E5%B7%9E/" class="article-date">
+  <time datetime="2024-01-13T03:35:31.000Z" itemprop="datePublished">2024-01-13</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E6%97%85%E8%A1%8C/">旅行</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><img src="/blog/image/%E6%9D%AD%E5%B7%9E/1.jpg" alt="杭州"></p>
+<p><img src="/blog/image/%E6%9D%AD%E5%B7%9E/2.jpg" alt="杭州"></p>
+<p><img src="/blog/image/%E6%9D%AD%E5%B7%9E/3.jpg" alt="杭州"></p>
+<p><img src="/blog/image/%E6%9D%AD%E5%B7%9E/4.jpg" alt="杭州"></p>
+<p><img src="/blog/image/%E6%9D%AD%E5%B7%9E/5.jpg" alt="杭州"></p>
+<p><img src="/blog/image/%E6%9D%AD%E5%B7%9E/6.jpg" alt="杭州"></p>
+<p><img src="/blog/image/%E6%9D%AD%E5%B7%9E/7.jpg" alt="杭州"></p>
+<p><img src="/blog/image/%E6%9D%AD%E5%B7%9E/8.jpg" alt="杭州"></p>
+<p><img src="/blog/image/%E6%9D%AD%E5%B7%9E/9.jpg" alt="杭州"></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E6%97%85%E8%A1%8C/" rel="tag">旅行</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-景德镇"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/blog/2024/01/01/%E6%99%AF%E5%BE%B7%E9%95%87/"
+    >景德镇</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/blog/2024/01/01/%E6%99%AF%E5%BE%B7%E9%95%87/" class="article-date">
+  <time datetime="2024-01-01T00:50:04.000Z" itemprop="datePublished">2024-01-01</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E6%97%85%E8%A1%8C/">旅行</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><img src="/blog/image/%E6%99%AF%E5%BE%B7%E9%95%87/1.jpg" alt="景德镇"></p>
+<p><img src="/blog/image/%E6%99%AF%E5%BE%B7%E9%95%87/2.jpg" alt="景德镇"></p>
+<p><img src="/blog/image/%E6%99%AF%E5%BE%B7%E9%95%87/3.jpg" alt="景德镇"></p>
+<p><img src="/blog/image/%E6%99%AF%E5%BE%B7%E9%95%87/4.jpg" alt="景德镇"></p>
+<p><img src="/blog/image/%E6%99%AF%E5%BE%B7%E9%95%87/5.jpg" alt="景德镇"></p>
+<p><img src="/blog/image/%E6%99%AF%E5%BE%B7%E9%95%87/6.jpg" alt="景德镇"></p>
+<p><img src="/blog/image/%E6%99%AF%E5%BE%B7%E9%95%87/7.jpg" alt="景德镇"></p>
+<p><img src="/blog/image/%E6%99%AF%E5%BE%B7%E9%95%87/8.jpg" alt="景德镇"></p>
+<p><img src="/blog/image/%E6%99%AF%E5%BE%B7%E9%95%87/9.jpg" alt="景德镇"></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E6%97%85%E8%A1%8C/" rel="tag">旅行</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-武汉"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/blog/2023/10/01/%E6%AD%A6%E6%B1%89/"
+    >武汉</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/blog/2023/10/01/%E6%AD%A6%E6%B1%89/" class="article-date">
+  <time datetime="2023-10-01T03:35:31.000Z" itemprop="datePublished">2023-10-01</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E6%97%85%E8%A1%8C/">旅行</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><img src="/blog/image/%E6%AD%A6%E6%B1%89/1.jpg" alt="武汉"></p>
+<p><img src="/blog/image/%E6%AD%A6%E6%B1%89/2.jpg" alt="武汉"></p>
+<p><img src="/blog/image/%E6%AD%A6%E6%B1%89/3.jpg" alt="武汉"></p>
+<p><img src="/blog/image/%E6%AD%A6%E6%B1%89/4.jpg" alt="武汉"></p>
+<p><img src="/blog/image/%E6%AD%A6%E6%B1%89/5.jpg" alt="武汉"></p>
+<p><img src="/blog/image/%E6%AD%A6%E6%B1%89/6.jpg" alt="武汉"></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E6%97%85%E8%A1%8C/" rel="tag">旅行</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-上海"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/blog/2023/05/01/%E4%B8%8A%E6%B5%B7/"
+    >上海</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/blog/2023/05/01/%E4%B8%8A%E6%B5%B7/" class="article-date">
+  <time datetime="2023-05-01T04:35:31.000Z" itemprop="datePublished">2023-05-01</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E6%97%85%E8%A1%8C/">旅行</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><img src="/blog/image/%E4%B8%8A%E6%B5%B7/1.jpg" alt="上海"></p>
+<p><img src="/blog/image/%E4%B8%8A%E6%B5%B7/2.jpg" alt="上海"></p>
+<p><img src="/blog/image/%E4%B8%8A%E6%B5%B7/3.jpg" alt="上海"></p>
+<p><img src="/blog/image/%E4%B8%8A%E6%B5%B7/4.jpg" alt="上海"></p>
+<p><img src="/blog/image/%E4%B8%8A%E6%B5%B7/5.jpg" alt="上海"></p>
+<p><img src="/blog/image/%E4%B8%8A%E6%B5%B7/6.jpg" alt="上海"></p>
+<p><img src="/blog/image/%E4%B8%8A%E6%B5%B7/7.jpg" alt="上海"></p>
+<p><img src="/blog/image/%E4%B8%8A%E6%B5%B7/8.jpg" alt="上海"></p>
+<p><img src="/blog/image/%E4%B8%8A%E6%B5%B7/9.jpg" alt="上海"></p>
+<p><img src="/blog/image/%E4%B8%8A%E6%B5%B7/10.jpg" alt="上海"></p>
+<p><img src="/blog/image/%E4%B8%8A%E6%B5%B7/11.jpg" alt="上海"></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E6%97%85%E8%A1%8C/" rel="tag">旅行</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+  </article>
+  
+
+  
+  <nav class="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/blog/page/8/">上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/7/">7</a><a class="page-number" href="/blog/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/blog/page/10/">10</a><a class="extend next" rel="next" href="/blog/page/10/">下一页</a>
+  </nav>
+  
+</section>
+</div>
+
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022-2024
+        <i class="ri-heart-fill heart_icon"></i> 何福海
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/blog/"><img src="/blog/images/ayer.png" alt="何福海的个人博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="https://wallpaper.seenav.cn/">壁纸</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/2022/01/01/%E5%85%B3%E4%BA%8E%E6%88%91/">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/blog/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯奶茶吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/blog/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/blog/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/blog/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/blog/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/blog/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/blog/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/blog/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/blog/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/blog/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=1497588709&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

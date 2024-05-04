@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="生活，旅行，思考，代码" />
+       
+      <meta name="description" content="有事者,事竟成;破釜沉舟,百二秦关终归楚;苦心人,天不负;卧薪尝胆,三千越甲可吞吴。" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>Node.js快速入门：搭建基础Web服务器与实现CRUD及登录功能 |  何福海的个人博客</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/blog/favicon.ico" />
+       
+<link rel="stylesheet" href="/blog/dist/main.css">
+
+      
+<link rel="stylesheet" href="/blog/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/blog/css/custom.css">
+  
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/blog/atom.xml" title="何福海的个人博客" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Node-js快速入门：搭建基础Web服务器与实现CRUD及登录功能"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Node.js快速入门：搭建基础Web服务器与实现CRUD及登录功能
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/blog/2024/03/22/Node-js%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%EF%BC%9A%E6%90%AD%E5%BB%BA%E5%9F%BA%E7%A1%80Web%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AE%9E%E7%8E%B0CRUD%E5%8F%8A%E7%99%BB%E5%BD%95%E5%8A%9F%E8%83%BD/" class="article-date">
+  <time datetime="2024-03-21T16:54:47.000Z" itemprop="datePublished">2024-03-22</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">10 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="Node-js快速入门：搭建基础Web服务器与实现CRUD及登录功能"><a href="#Node-js快速入门：搭建基础Web服务器与实现CRUD及登录功能" class="headerlink" title="Node.js快速入门：搭建基础Web服务器与实现CRUD及登录功能"></a>Node.js快速入门：搭建基础Web服务器与实现CRUD及登录功能</h2><p>在Node.js中，创建一个功能完备的Web服务器如同搭积木般简单。借助Node.js的<code>http</code>模块和一些强大的第三方库，我们可以快速搭建起一个响应灵敏的服务器。本教程将详细介绍如何使用Node.js进行数据库操作和用户认证，包括创建数据库、实现CRUD操作和登录验证等关键步骤。</p>
+<h2 id="技术栈介绍"><a href="#技术栈介绍" class="headerlink" title="技术栈介绍"></a>技术栈介绍</h2><h3 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h3><p>Node.js是一个跨平台的运行时环境，它允许您在服务器上运行JavaScript代码。它基于事件驱动和非阻塞I&#x2F;O模型，这使得Node.js非常适合处理大量并发连接。</p>
+<h3 id="Express"><a href="#Express" class="headerlink" title="Express"></a>Express</h3><p>Express是一个灵活的Node.js Web应用框架，提供了一系列强大的功能，用于构建单页、多页以及混合Web应用。它简化了路由、中间件管理和错误处理等常见Web开发任务。</p>
+<h3 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h3><p>mysql是一个Node.js的客户端库，用于与MySQL数据库进行交互。它提供了一个简单易用的API，用于执行SQL查询和接收数据库响应。</p>
+<h3 id="body-parser"><a href="#body-parser" class="headerlink" title="body-parser"></a>body-parser</h3><p>body-parser是Express的一个中间件，用于解析请求体中的JSON和URL编码的数据。它使得处理POST请求和解析复杂数据变得更加容易。</p>
+<h3 id="cors"><a href="#cors" class="headerlink" title="cors"></a>cors</h3><p>cors（Cross-Origin Resource Sharing）是一个Node.js的中间件，用于实现跨源资源共享。它允许您指定哪些域名可以访问您的资源，从而避免了跨域请求问题。</p>
+<h2 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h2><h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>首先，确保您的计算机上安装了Node.js和npm（Node Package Manager），这是Node.js开发的基础工具集。</p>
+<h3 id="项目初始化"><a href="#项目初始化" class="headerlink" title="项目初始化"></a>项目初始化</h3><p>在您的工作目录中，创建一个新的文件夹用于存放项目文件，并在该目录下运行<code>npm init</code>命令来初始化一个新的Node.js项目。</p>
+<h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><p>通过运行<code>npm install express mysql body-parser cors</code>命令，安装项目所需的第三方库：Express用于Web框架，<code>mysql</code>用于数据库操作，body-parser用于解析请求体，<code>cors</code>用于处理跨域请求。</p>
+<h3 id="配置数据库"><a href="#配置数据库" class="headerlink" title="配置数据库"></a>配置数据库</h3><p>首先，我们需要设置一个名为<code>crud_demo</code>的数据库，其中包含一个<code>user</code>表，字段包括<code>id</code>、<code>name</code>、<code>sex</code>和<code>age</code>。</p>
+<h3 id="编写服务器代码"><a href="#编写服务器代码" class="headerlink" title="编写服务器代码"></a>编写服务器代码</h3><p>在项目目录中，创建一个JavaScript文件，例如<code>server.js</code>，并开始编写服务器代码。使用<code>const express = require(&#39;express&#39;)</code>引入Express模块，并实例化一个Express应用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//引用mysql依赖</span></span><br><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">&quot;mysql&quot;</span>);</span><br><span class="line"><span class="comment">//引用express依赖</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&quot;express&quot;</span>);</span><br><span class="line"><span class="comment">//引用body-parser 解析post传参</span></span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">&quot;body-parser&quot;</span>);</span><br><span class="line"><span class="comment">//express实例化</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>();</span><br><span class="line"><span class="comment">//引用 cors</span></span><br><span class="line"><span class="keyword">const</span> cors = <span class="built_in">require</span>(<span class="string">&quot;cors&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; json &#125; = <span class="built_in">require</span>(<span class="string">&quot;body-parser&quot;</span>);</span><br><span class="line"><span class="comment">//关闭Form表单传值</span></span><br><span class="line">app.<span class="title function_">use</span>(bodyParser.<span class="title function_">urlencoded</span>(&#123; <span class="attr">extended</span>: <span class="literal">false</span> &#125;));</span><br><span class="line"><span class="comment">//使用Json传值</span></span><br><span class="line">app.<span class="title function_">use</span>(bodyParser.<span class="title function_">json</span>());</span><br><span class="line"><span class="comment">//使用cors 解决跨域问题</span></span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">cors</span>());</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="配置数据库连接"><a href="#配置数据库连接" class="headerlink" title="配置数据库连接"></a>配置数据库连接</h3><p>使用<code>mysql</code>模块创建一个连接到MySQL数据库的客户端实例，并提供必要的连接信息。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> connection = mysql.<span class="title function_">createConnection</span>(&#123;</span><br><span class="line">  <span class="attr">host</span>: <span class="string">&quot;localhost&quot;</span>,</span><br><span class="line">  <span class="attr">user</span>: <span class="string">&quot;root&quot;</span>,</span><br><span class="line">  <span class="attr">password</span>: <span class="string">&quot;password&quot;</span>,<span class="comment">//修改成自己的密码</span></span><br><span class="line">  <span class="attr">database</span>: <span class="string">&quot;crud_demo&quot;</span>,<span class="comment">//修改成自己的数据库名</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 建立数据库连接</span></span><br><span class="line">connection.<span class="title function_">connect</span>();</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="解析请求体"><a href="#解析请求体" class="headerlink" title="解析请求体"></a>解析请求体</h3><p>使用<code>body-parser</code>中间件来解析传入的JSON和URL编码的数据。</p>
+<h3 id="处理跨域请求"><a href="#处理跨域请求" class="headerlink" title="处理跨域请求"></a>处理跨域请求</h3><p>通过<code>cors</code>中间件配置，允许跨域请求访问您的服务器。</p>
+<h3 id="实现CRUD操作"><a href="#实现CRUD操作" class="headerlink" title="实现CRUD操作"></a>实现CRUD操作</h3><p>为Express应用定义路由，实现对数据库的增删改查操作。</p>
+<h4 id="Select操作"><a href="#Select操作" class="headerlink" title="Select操作"></a>Select操作</h4><p>创建一个GET路由，用于从数据库中检索并返回用户数据。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * select</span></span><br><span class="line"><span class="comment"> * http://127.0.0.1:3000/api</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&quot;/api&quot;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> sql = <span class="string">&quot;select * from user&quot;</span>;</span><br><span class="line">  connection.<span class="title function_">query</span>(sql, <span class="keyword">function</span> (<span class="params">error, results, fields</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(results);</span><br><span class="line">    <span class="comment">// return results;</span></span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">json</span>(results);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Delete操作"><a href="#Delete操作" class="headerlink" title="Delete操作"></a>Delete操作</h4><p>创建一个GET路由，接受用户ID作为参数，并从数据库中删除对应记录。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * delete</span></span><br><span class="line"><span class="comment"> * http://127.0.0.1:3000/api/delete/4</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&quot;/api/delete/:id&quot;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(req.<span class="property">params</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(req.<span class="property">params</span>.<span class="property">id</span>);</span><br><span class="line">  <span class="keyword">let</span> delSql = <span class="string">`DELETE FROM user where id= <span class="subst">$&#123;<span class="built_in">parseInt</span>(req.params.id)&#125;</span>`</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(delSql);</span><br><span class="line">  connection.<span class="title function_">query</span>(delSql, <span class="keyword">function</span> (<span class="params">error, results</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(results);</span><br><span class="line">    <span class="comment">// return results;</span></span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">json</span>(results);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Insert操作"><a href="#Insert操作" class="headerlink" title="Insert操作"></a>Insert操作</h4><p>创建一个GET路由，接受用户信息作为查询参数，并将其插入数据库。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * insert</span></span><br><span class="line"><span class="comment"> * http://localhost:3000/api/insert?id=4&amp;name=xiaohe&amp;sex=%E7%94%B7&amp;age=19</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&quot;/api/insert&quot;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(req.<span class="property">query</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(req.<span class="property">body</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(req.<span class="property">query</span>.<span class="property">id</span>);</span><br><span class="line">  <span class="keyword">let</span> insertSql = <span class="string">`insert into user VALUES(?,?,?,?)`</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(insertSql);</span><br><span class="line">  <span class="keyword">let</span> data = [req.<span class="property">query</span>.<span class="property">id</span>, req.<span class="property">query</span>.<span class="property">name</span>, req.<span class="property">query</span>.<span class="property">sex</span>, req.<span class="property">query</span>.<span class="property">age</span>];</span><br><span class="line">  connection.<span class="title function_">query</span>(insertSql, data, <span class="keyword">function</span> (<span class="params">error, results</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(results);</span><br><span class="line">    <span class="comment">// return results;</span></span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">json</span>(results);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Update操作"><a href="#Update操作" class="headerlink" title="Update操作"></a>Update操作</h4><p>创建一个GET路由，接受用户ID和更新信息作为查询参数，并更新数据库中的记录。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * update</span></span><br><span class="line"><span class="comment"> * http://localhost:3000/api/update?id=4&amp;name=%E7%99%BE%E5%BA%A6&amp;sex=%E7%94%B7&amp;age=999</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&quot;/api/update&quot;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(req.<span class="property">query</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(req.<span class="property">body</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(req.<span class="property">query</span>.<span class="property">id</span>);</span><br><span class="line">  <span class="keyword">let</span> updateSql = <span class="string">`update user set name = ?, sex = ?, age = ? where id = ?`</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(updateSql);</span><br><span class="line">  <span class="keyword">let</span> data = [req.<span class="property">query</span>.<span class="property">name</span>, req.<span class="property">query</span>.<span class="property">sex</span>, req.<span class="property">query</span>.<span class="property">age</span>, req.<span class="property">query</span>.<span class="property">id</span>];</span><br><span class="line">  connection.<span class="title function_">query</span>(updateSql, data, <span class="keyword">function</span> (<span class="params">error, results</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(results);</span><br><span class="line">    <span class="comment">// return results;</span></span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">json</span>(results);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="实现登录功能"><a href="#实现登录功能" class="headerlink" title="实现登录功能"></a>实现登录功能</h4><p>创建一个GET路由，用于接收登录请求，验证用户凭据，并返回登录结果。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * login</span></span><br><span class="line"><span class="comment"> * http://127.0.0.1:3000/api/login?name=&quot;1234567890&quot;&amp;pwd=&quot;123456&quot;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&quot;/api/login&quot;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> loginSql = <span class="string">`select * from user where name = ? and pwd = ?`</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(loginSql);</span><br><span class="line">  <span class="keyword">let</span> data = [req.<span class="property">query</span>.<span class="property">name</span>, req.<span class="property">query</span>.<span class="property">pwd</span>];</span><br><span class="line">  connection.<span class="title function_">query</span>(loginSql, data, <span class="keyword">function</span> (<span class="params">error, results, fields</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(results);</span><br><span class="line">    <span class="comment">// return results;</span></span><br><span class="line">    <span class="keyword">if</span> (results.<span class="property">length</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;登录成功&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;账号不存在&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">json</span>(results);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h2><p>使用<code>app.listen()</code>方法启动Express服务器，并指定端口号，例如3000。</p>
+<h2 id="全部代码"><a href="#全部代码" class="headerlink" title="全部代码"></a>全部代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//引用mysql依赖</span></span><br><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">&quot;mysql&quot;</span>);</span><br><span class="line"><span class="comment">//引用express依赖</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&quot;express&quot;</span>);</span><br><span class="line"><span class="comment">//引用body-parser 解析post传参</span></span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">&quot;body-parser&quot;</span>);</span><br><span class="line"><span class="comment">//express实例化</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>();</span><br><span class="line"><span class="comment">//引用 cors</span></span><br><span class="line"><span class="keyword">const</span> cors = <span class="built_in">require</span>(<span class="string">&quot;cors&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; json &#125; = <span class="built_in">require</span>(<span class="string">&quot;body-parser&quot;</span>);</span><br><span class="line"><span class="comment">//关闭Form表单传值</span></span><br><span class="line">app.<span class="title function_">use</span>(bodyParser.<span class="title function_">urlencoded</span>(&#123; <span class="attr">extended</span>: <span class="literal">false</span> &#125;));</span><br><span class="line"><span class="comment">//使用Json传值</span></span><br><span class="line">app.<span class="title function_">use</span>(bodyParser.<span class="title function_">json</span>());</span><br><span class="line"><span class="comment">//使用cors 解决跨域问题</span></span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">cors</span>());</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> connection = mysql.<span class="title function_">createConnection</span>(&#123;</span><br><span class="line">  <span class="attr">host</span>: <span class="string">&quot;localhost&quot;</span>,</span><br><span class="line">  <span class="attr">user</span>: <span class="string">&quot;root&quot;</span>,</span><br><span class="line">  <span class="attr">password</span>: <span class="string">&quot;password&quot;</span>,<span class="comment">//修改成自己的密码</span></span><br><span class="line">  <span class="attr">database</span>: <span class="string">&quot;crud_demo&quot;</span>,<span class="comment">//修改成自己的数据库名</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 建立数据库连接</span></span><br><span class="line">connection.<span class="title function_">connect</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * select</span></span><br><span class="line"><span class="comment"> * http://127.0.0.1:3000/api</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&quot;/api&quot;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> sql = <span class="string">&quot;select * from user&quot;</span>;</span><br><span class="line">  connection.<span class="title function_">query</span>(sql, <span class="keyword">function</span> (<span class="params">error, results, fields</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(results);</span><br><span class="line">    <span class="comment">// return results;</span></span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">json</span>(results);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * delete</span></span><br><span class="line"><span class="comment"> * http://127.0.0.1:3000/api/delete/4</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&quot;/api/delete/:id&quot;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(req.<span class="property">params</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(req.<span class="property">params</span>.<span class="property">id</span>);</span><br><span class="line">  <span class="keyword">let</span> delSql = <span class="string">`DELETE FROM user where id= <span class="subst">$&#123;<span class="built_in">parseInt</span>(req.params.id)&#125;</span>`</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(delSql);</span><br><span class="line">  connection.<span class="title function_">query</span>(delSql, <span class="keyword">function</span> (<span class="params">error, results</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(results);</span><br><span class="line">    <span class="comment">// return results;</span></span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">json</span>(results);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * insert</span></span><br><span class="line"><span class="comment"> * http://localhost:3000/api/insert?id=4&amp;name=xiaohe&amp;sex=%E7%94%B7&amp;age=19</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&quot;/api/insert&quot;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(req.<span class="property">query</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(req.<span class="property">body</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(req.<span class="property">query</span>.<span class="property">id</span>);</span><br><span class="line">  <span class="keyword">let</span> insertSql = <span class="string">`insert into user VALUES(?,?,?,?)`</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(insertSql);</span><br><span class="line">  <span class="keyword">let</span> data = [req.<span class="property">query</span>.<span class="property">id</span>, req.<span class="property">query</span>.<span class="property">name</span>, req.<span class="property">query</span>.<span class="property">sex</span>, req.<span class="property">query</span>.<span class="property">age</span>];</span><br><span class="line">  connection.<span class="title function_">query</span>(insertSql, data, <span class="keyword">function</span> (<span class="params">error, results</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(results);</span><br><span class="line">    <span class="comment">// return results;</span></span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">json</span>(results);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * update</span></span><br><span class="line"><span class="comment"> * http://localhost:3000/api/update?id=4&amp;name=%E7%99%BE%E5%BA%A6&amp;sex=%E7%94%B7&amp;age=999</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&quot;/api/update&quot;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(req.<span class="property">query</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(req.<span class="property">body</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(req.<span class="property">query</span>.<span class="property">id</span>);</span><br><span class="line">  <span class="keyword">let</span> updateSql = <span class="string">`update user set name = ?, sex = ?, age = ? where id = ?`</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(updateSql);</span><br><span class="line">  <span class="keyword">let</span> data = [req.<span class="property">query</span>.<span class="property">name</span>, req.<span class="property">query</span>.<span class="property">sex</span>, req.<span class="property">query</span>.<span class="property">age</span>, req.<span class="property">query</span>.<span class="property">id</span>];</span><br><span class="line">  connection.<span class="title function_">query</span>(updateSql, data, <span class="keyword">function</span> (<span class="params">error, results</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(results);</span><br><span class="line">    <span class="comment">// return results;</span></span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">json</span>(results);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * login</span></span><br><span class="line"><span class="comment"> * http://127.0.0.1:3000/api/login?name=&quot;1234567890&quot;&amp;pwd=&quot;123456&quot;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&quot;/api/login&quot;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> loginSql = <span class="string">`select * from user where name = ? and pwd = ?`</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(loginSql);</span><br><span class="line">  <span class="keyword">let</span> data = [req.<span class="property">query</span>.<span class="property">name</span>, req.<span class="property">query</span>.<span class="property">pwd</span>];</span><br><span class="line">  connection.<span class="title function_">query</span>(loginSql, data, <span class="keyword">function</span> (<span class="params">error, results, fields</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(results);</span><br><span class="line">    <span class="comment">// return results;</span></span><br><span class="line">    <span class="keyword">if</span> (results.<span class="property">length</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;登录成功&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;账号不存在&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">json</span>(results);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;服务器启动成功...&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>使用Web浏览器或API测试工具（如Postman）访问服务器的路由，验证CRUD和登录功能是否按预期工作。</p>
+<p><strong>如果对你有帮助，点赞、收藏、关注是我更新的动力！👋🌟🚀</strong></p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://bestwishes0203.gitee.io/blog/2024/03/22/Node-js%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%EF%BC%9A%E6%90%AD%E5%BB%BA%E5%9F%BA%E7%A1%80Web%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AE%9E%E7%8E%B0CRUD%E5%8F%8A%E7%99%BB%E5%BD%95%E5%8A%9F%E8%83%BD/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Nodejs/" rel="tag">Nodejs</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/blog/2024/03/22/Node-js%E6%A0%B8%E5%BF%83%E5%91%BD%E4%BB%A4%E4%B8%8E%E5%B7%A5%E5%85%B7%EF%BC%9A%E6%8F%90%E5%8D%87%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87%E7%9A%84%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Node.js核心命令与工具：提升开发效率的实用指南
+          
+        </div>
+      </a>
+    
+    
+      <a href="/blog/2024/03/22/%F0%9F%9A%80-%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A%E5%AD%A6%E7%94%9F%E7%9A%84%E6%88%90%E9%95%BF%E4%B9%8B%E8%B7%AF%EF%BC%9A%E8%B6%85%E8%B6%8A%E8%AF%BE%E5%A0%82%E7%9A%84%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87%E7%AD%96%E7%95%A5-%F0%9F%93%9A/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">🚀 计算机专业学生的成长之路：超越课堂的自我提升策略 📚</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022-2024
+        <i class="ri-heart-fill heart_icon"></i> 何福海
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/blog/"><img src="/blog/images/ayer.png" alt="何福海的个人博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="https://wallpaper.seenav.cn/">壁纸</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/2022/01/01/%E5%85%B3%E4%BA%8E%E6%88%91/">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/blog/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯奶茶吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/blog/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/blog/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/blog/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/blog/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/blog/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/blog/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/blog/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/blog/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/blog/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/blog/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=1497588709&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

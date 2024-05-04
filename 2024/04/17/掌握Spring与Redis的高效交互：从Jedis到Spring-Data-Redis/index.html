@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="生活，旅行，思考，代码" />
+       
+      <meta name="description" content="有事者,事竟成;破釜沉舟,百二秦关终归楚;苦心人,天不负;卧薪尝胆,三千越甲可吞吴。" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>掌握Spring与Redis的高效交互：从Jedis到Spring Data Redis |  何福海的个人博客</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/blog/favicon.ico" />
+       
+<link rel="stylesheet" href="/blog/dist/main.css">
+
+      
+<link rel="stylesheet" href="/blog/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/blog/css/custom.css">
+  
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/blog/atom.xml" title="何福海的个人博客" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-掌握Spring与Redis的高效交互：从Jedis到Spring-Data-Redis"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  掌握Spring与Redis的高效交互：从Jedis到Spring Data Redis
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/blog/2024/04/17/%E6%8E%8C%E6%8F%A1Spring%E4%B8%8ERedis%E7%9A%84%E9%AB%98%E6%95%88%E4%BA%A4%E4%BA%92%EF%BC%9A%E4%BB%8EJedis%E5%88%B0Spring-Data-Redis/" class="article-date">
+  <time datetime="2024-04-16T16:31:44.000Z" itemprop="datePublished">2024-04-17</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">10 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="掌握Spring与Redis的高效交互：从Jedis到Spring-Data-Redis"><a href="#掌握Spring与Redis的高效交互：从Jedis到Spring-Data-Redis" class="headerlink" title="掌握Spring与Redis的高效交互：从Jedis到Spring Data Redis"></a>掌握Spring与Redis的高效交互：从Jedis到Spring Data Redis</h1><p>Redis以其卓越的性能和多功能性成为了不可或缺的组件。本文将深入探讨如何在Spring框架中通过Jedis和JedisPool直接操作Redis，以及如何利用Spring Data Redis简化数据交互过程。我们将从环境搭建开始，逐步介绍依赖引入、代码编写、功能实现，最终通过实例展示如何在Spring Boot应用中高效地使用Redis。无论你是初学者还是有经验的开发者，本文都将为你提供有价值的见解和实用的操作指南。</p>
+<h2 id="Spring中通过Jedis操作Redis数据库的实践指南"><a href="#Spring中通过Jedis操作Redis数据库的实践指南" class="headerlink" title="Spring中通过Jedis操作Redis数据库的实践指南"></a>Spring中通过Jedis操作Redis数据库的实践指南</h2><p>在现代的Web应用开发中，Redis已经成为了一个非常重要的组件，它以其出色的性能、完美的文档、简洁易懂的API和丰富的数据结构支持，被广泛应用于缓存、消息队列、排行榜、实时系统等多个场景。Spring作为Java界最受欢迎的框架之一，与Redis的结合使用自然也成为了开发者们的必备技能。本文将通过一段简单的代码示例，介绍如何在Spring框架中使用Jedis来操作Redis数据库。</p>
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p>在开始之前，确保你的开发环境中已经安装了以下组件：</p>
+<ul>
+<li>Java开发环境（JDK）</li>
+<li>Maven或Gradle（用于依赖管理）</li>
+<li>Redis服务端（可以从<a target="_blank" rel="noopener" href="https://redis.io/download">官网</a>下载并自行搭建，也可以使用在线的Redis服务）</li>
+<li>Spring Boot（简化Spring应用的搭建和配置）</li>
+</ul>
+<h3 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h3><p>在Spring Boot项目中，我们通常会使用Maven或Gradle来管理项目的依赖。为了使用Jedis，我们需要在项目的<code>pom.xml</code>（Maven）或<code>build.gradle</code>（Gradle）文件中添加以下依赖：</p>
+<p><strong>Maven:</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>redis.clients<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jedis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.6.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Gradle:</strong></p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">&#x27;redis.clients:jedis:3.6.0&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>请将<code>最新版本号</code>替换为当前Jedis的最新版本。</p>
+<h3 id="编写代码"><a href="#编写代码" class="headerlink" title="编写代码"></a>编写代码</h3><p>以下是一个简单的Spring Boot控制器示例，展示了如何在一个GET请求中使用Jedis来操作Redis。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.springredis.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"><span class="keyword">import</span> redis.clients.jedis.Jedis;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;test01&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test01</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 连接到Redis服务</span></span><br><span class="line">        <span class="type">Jedis</span> <span class="variable">jedis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Jedis</span>(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">6379</span>);</span><br><span class="line">        <span class="comment">// 如果你的Redis设置了密码，需要进行认证</span></span><br><span class="line">        jedis.auth(<span class="string">&quot;yourPasswordHere&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取所有的key</span></span><br><span class="line">        Set&lt;String&gt; keys = jedis.keys(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        keys.forEach(System.out::println);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 向Redis中添加几个key-value对</span></span><br><span class="line">        jedis.set(<span class="string">&quot;k1&quot;</span>, <span class="string">&quot;v1&quot;</span>);</span><br><span class="line">        jedis.set(<span class="string">&quot;k2&quot;</span>, <span class="string">&quot;v2&quot;</span>);</span><br><span class="line">        jedis.set(<span class="string">&quot;k3&quot;</span>, <span class="string">&quot;v3&quot;</span>);</span><br><span class="line">        jedis.set(<span class="string">&quot;k4&quot;</span>, <span class="string">&quot;v4&quot;</span>);</span><br><span class="line">        jedis.set(<span class="string">&quot;k5&quot;</span>, <span class="string">&quot;v5&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 删除指定的key</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">c</span> <span class="operator">=</span> jedis.del(<span class="string">&quot;k1&quot;</span>, <span class="string">&quot;k2&quot;</span>, <span class="string">&quot;k5&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;删除key的个数: &quot;</span> + c);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 判断指定的key是否存在</span></span><br><span class="line">        <span class="type">Boolean</span> <span class="variable">exists</span> <span class="operator">=</span> jedis.exists(<span class="string">&quot;k2&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;判断key是否存在: &quot;</span> + exists);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 关闭资源</span></span><br><span class="line">        jedis.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h3><p>在这段代码中，我们首先创建了一个<code>Jedis</code>对象来连接到Redis服务。默认情况下，Jedis会尝试连接到<code>127.0.0.1</code>上的6379端口，这也是Redis的默认配置。如果你的Redis服务运行在不同的主机或端口上，你需要在构造<code>Jedis</code>对象时提供相应的参数。</p>
+<p>接着，我们使用<code>auth</code>方法对Redis进行了认证，这一步仅在Redis设置了密码的情况下需要。</p>
+<p>然后，我们使用<code>keys</code>方法获取了所有的key，并打印了出来。之后，我们通过<code>set</code>方法向Redis中添加了几个key-value对。</p>
+<p>为了展示如何管理key，我们还演示了如何删除指定的key（使用<code>del</code>方法），以及如何检查一个key是否存在（使用<code>exists</code>方法）。</p>
+<p>最后，我们关闭了<code>Jedis</code>对象，释放了与之相关的资源。</p>
+<h2 id="Spring中通过JedisPool高效操作Redis数据库的实践指南"><a href="#Spring中通过JedisPool高效操作Redis数据库的实践指南" class="headerlink" title="Spring中通过JedisPool高效操作Redis数据库的实践指南"></a>Spring中通过JedisPool高效操作Redis数据库的实践指南</h2><p>在上一篇关于Spring通过Jedis操作Redis的文章中，我们了解了如何使用Jedis来执行基本的Redis操作。然而，在高并发的场景下，频繁地创建和销毁Jedis连接会导致性能问题。为了解决这一问题，Jedis提供了连接池的实现——JedisPool，它能够有效地管理Jedis连接，提高资源利用率和操作效率。本文将通过一个简单的Spring Boot控制器示例，介绍如何在Spring框架中使用JedisPool来高效操作Redis数据库。</p>
+<h3 id="引入依赖-1"><a href="#引入依赖-1" class="headerlink" title="引入依赖"></a>引入依赖</h3><p>首先，确保你的项目中已经引入了Jedis的依赖，如前文所述，在<code>pom.xml</code>或<code>build.gradle</code>中添加以下依赖：</p>
+<p><strong>Maven:</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>redis.clients<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jedis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.6.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Gradle:</strong></p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">&#x27;redis.clients:jedis:3.6.0&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>请将<code>最新版本号</code>替换为当前Jedis的最新版本。</p>
+<h3 id="编写代码-1"><a href="#编写代码-1" class="headerlink" title="编写代码"></a>编写代码</h3><p>以下是一个Spring Boot控制器的示例，展示了如何使用JedisPool来操作Redis。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.springredis.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"><span class="keyword">import</span> redis.clients.jedis.Jedis;</span><br><span class="line"><span class="keyword">import</span> redis.clients.jedis.JedisPool;</span><br><span class="line"><span class="keyword">import</span> redis.clients.jedis.JedisPoolConfig;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisPoolController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;test04&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test04</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 创建连接池的配置类</span></span><br><span class="line">        <span class="type">JedisPoolConfig</span> <span class="variable">config</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JedisPoolConfig</span>();</span><br><span class="line">        config.setMinIdle(<span class="number">5</span>); <span class="comment">// 设置空闲的个数</span></span><br><span class="line">        config.setMaxIdle(<span class="number">10</span>);</span><br><span class="line">        config.setMaxTotal(<span class="number">2000</span>); <span class="comment">// 设置最多的数量</span></span><br><span class="line">        config.setMaxWaitMillis(<span class="number">6000</span>); <span class="comment">// 设置最大的等待时长</span></span><br><span class="line">        config.setTestOnBorrow(<span class="literal">true</span>); <span class="comment">// 是否检验池子中的jedis对象可用</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建jedis连接池对象</span></span><br><span class="line">        <span class="type">JedisPool</span> <span class="variable">jedisPool</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JedisPool</span>(config, <span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">6379</span>, <span class="number">1000</span>, <span class="string">&quot;rootXH&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 通过池子获取其中的一个连接</span></span><br><span class="line">        <span class="type">Jedis</span> <span class="variable">jedis</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            jedis = jedisPool.getResource();</span><br><span class="line">            <span class="comment">// 执行Redis操作</span></span><br><span class="line">            Map&lt;String, String&gt; map1 = jedis.hgetAll(<span class="string">&quot;myhash&quot;</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;获取指定key对应的内容: &quot;</span> + map1);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">// 关闭Jedis连接</span></span><br><span class="line">            <span class="keyword">if</span> (jedis != <span class="literal">null</span>) &#123;</span><br><span class="line">                jedis.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码解析-1"><a href="#代码解析-1" class="headerlink" title="代码解析"></a>代码解析</h3><p>在这段代码中，我们首先创建了一个<code>JedisPoolConfig</code>对象，用于配置连接池的参数。我们设置了最小空闲连接数、最大空闲连接数、最大连接数、最大等待时长以及是否在借用连接时进行有效性检查。</p>
+<p>接着，我们使用<code>JedisPool</code>构造函数创建了一个连接池对象。这里的参数包括配置类、Redis服务器的IP地址、端口号、超时时间和密码。请根据你的Redis服务器实际情况进行相应的修改。</p>
+<p>然后，我们通过<code>getResource</code>方法从连接池中获取了一个<code>Jedis</code>实例。在这个实例上，我们可以执行各种Redis操作，例如本例中的<code>hgetAll</code>方法，它用于获取指定key对应的哈希表中的所有字段和值。</p>
+<p>最后，我们使用<code>finally</code>块确保<code>Jedis</code>连接被正确关闭，无论操作是否成功。这是一个非常重要的步骤，因为它可以避免连接泄露和其他潜在的资源问题。</p>
+<h2 id="Spring-Boot中使用Spring-Data-Redis操作数据库的实践指南"><a href="#Spring-Boot中使用Spring-Data-Redis操作数据库的实践指南" class="headerlink" title="Spring Boot中使用Spring Data Redis操作数据库的实践指南"></a>Spring Boot中使用Spring Data Redis操作数据库的实践指南</h2><p>在现代的Web应用开发中，Redis已经成为了一个非常重要的组件，它以其出色的性能、完美的文档、简洁易懂的API和丰富的数据结构支持，被广泛应用于缓存、消息队列、排行榜、实时系统等多个场景。Spring Data Redis是Spring提供的一个简化Redis操作的框架，它使得我们可以更加便捷地在Spring应用中使用Redis。本文将通过一个Spring Boot控制器示例，介绍如何使用Spring Data Redis来操作Redis数据库。</p>
+<h3 id="环境准备-1"><a href="#环境准备-1" class="headerlink" title="环境准备"></a>环境准备</h3><p>在开始之前，确保你的开发环境中已经安装了以下组件：</p>
+<ul>
+<li>Java开发环境（JDK）</li>
+<li>Maven或Gradle（用于依赖管理）</li>
+<li>Redis服务端（可以从<a target="_blank" rel="noopener" href="https://redis.io/download">官网</a>下载并自行搭建，也可以使用在线的Redis服务）</li>
+<li>Spring Boot（简化Spring应用的搭建和配置）</li>
+</ul>
+<h3 id="引入依赖-2"><a href="#引入依赖-2" class="headerlink" title="引入依赖"></a>引入依赖</h3><p>在Spring Boot项目中，我们通常会使用Maven或Gradle来管理项目的依赖。为了使用Spring Data Redis，我们需要在项目的<code>pom.xml</code>（Maven）或<code>build.gradle</code>（Gradle）文件中添加以下依赖：</p>
+<p><strong>Maven:</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Gradle:</strong></p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">&#x27;org.springframework.boot:spring-boot-starter-data-redis&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="编写代码-2"><a href="#编写代码-2" class="headerlink" title="编写代码"></a>编写代码</h3><p>以下是一个Spring Boot控制器的示例，展示了如何使用Spring Data Redis来操作Redis。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.springredis.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.StringRedisTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.ValueOperations;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisDataController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> StringRedisTemplate stringRedisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;test05&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test05</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 获取对string类型操作的类对象</span></span><br><span class="line">        ValueOperations&lt;String, String&gt; forValue = stringRedisTemplate.opsForValue();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 设置键值对</span></span><br><span class="line">        forValue.set(<span class="string">&quot;n1&quot;</span>, <span class="string">&quot;测试数据1&quot;</span>);</span><br><span class="line">        forValue.set(<span class="string">&quot;n2&quot;</span>, <span class="string">&quot;2&quot;</span>);</span><br><span class="line">        forValue.set(<span class="string">&quot;n3&quot;</span>, <span class="string">&quot;测试数据3&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果存在 则不存入 不存在则存入</span></span><br><span class="line">        <span class="type">Boolean</span> <span class="variable">aBoolean</span> <span class="operator">=</span> forValue.setIfAbsent(<span class="string">&quot;n4&quot;</span>, <span class="string">&quot;测试数据4&quot;</span>, <span class="number">25</span>, TimeUnit.SECONDS);</span><br><span class="line">        System.out.println(<span class="string">&quot;是否存入成功 &quot;</span> + aBoolean);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取对应的值</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">n1</span> <span class="operator">=</span> forValue.get(<span class="string">&quot;n1&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;n1 = &quot;</span> + n1);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 递增操作</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">n2</span> <span class="operator">=</span> forValue.increment(<span class="string">&quot;n2&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;n2递增后的值 &quot;</span> + n2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码解析-2"><a href="#代码解析-2" class="headerlink" title="代码解析"></a>代码解析</h3><p>在这段代码中，我们首先通过<code>@Autowired</code>注解自动注入了一个<code>StringRedisTemplate</code>对象。<code>StringRedisTemplate</code>是Spring Data Redis提供的一个类，它封装了对字符串类型数据的操作。</p>
+<p>接着，我们通过<code>opsForValue</code>方法获取了一个<code>ValueOperations</code>对象，它提供了对Redis中的字符串类型数据进行操作的方法。</p>
+<p>我们使用<code>set</code>方法设置了三个键值对。然后，我们使用<code>setIfAbsent</code>方法尝试设置一个新的键值对，但仅当指定的key不存在时才进行设置。这个方法非常有用，当我们想要保证某个键值对的唯一性时。</p>
+<p>之后，我们通过<code>get</code>方法获取了一个已经设置的键对应的值，并打印了出来。</p>
+<p>最后，我们使用<code>increment</code>方法对一个键对应的值进行了递增操作。这个方法可以接受一个可选的增量参数，如果不指定，则默认递增1。</p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://bestwishes0203.gitee.io/blog/2024/04/17/%E6%8E%8C%E6%8F%A1Spring%E4%B8%8ERedis%E7%9A%84%E9%AB%98%E6%95%88%E4%BA%A4%E4%BA%92%EF%BC%9A%E4%BB%8EJedis%E5%88%B0Spring-Data-Redis/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Spring/" rel="tag">Spring</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/blog/2024/04/17/Spring-Boot-%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%9AYML-%E6%96%87%E4%BB%B6%E7%9A%84%E4%B8%89%E7%A7%8D%E9%AB%98%E6%95%88%E6%96%B9%E6%B3%95/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Spring Boot 多环境配置：YML 文件的三种高效方法
+          
+        </div>
+      </a>
+    
+    
+      <a href="/blog/2024/04/15/Vue%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E5%9F%BA%E4%BA%8E%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E7%9A%84%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Vue项目实战：基于用户身份的动态路由管理</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022-2024
+        <i class="ri-heart-fill heart_icon"></i> 何福海
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/blog/"><img src="/blog/images/ayer.png" alt="何福海的个人博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="https://wallpaper.seenav.cn/">壁纸</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/2022/01/01/%E5%85%B3%E4%BA%8E%E6%88%91/">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/blog/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯奶茶吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/blog/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/blog/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/blog/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/blog/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/blog/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/blog/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/blog/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/blog/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/blog/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/blog/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=1497588709&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

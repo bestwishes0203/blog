@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="生活，旅行，思考，代码" />
+       
+      <meta name="description" content="有事者,事竟成;破釜沉舟,百二秦关终归楚;苦心人,天不负;卧薪尝胆,三千越甲可吞吴。" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>米哈游一面前端开发岗面试题，你会做几道? |  何福海的个人博客</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/blog/favicon.ico" />
+       
+<link rel="stylesheet" href="/blog/dist/main.css">
+
+      
+<link rel="stylesheet" href="/blog/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/blog/css/custom.css">
+  
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/blog/atom.xml" title="何福海的个人博客" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-米哈游一面前端开发岗面试题，你会做几道"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  米哈游一面前端开发岗面试题，你会做几道?
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/blog/2024/03/16/%E7%B1%B3%E5%93%88%E6%B8%B8%E4%B8%80%E9%9D%A2%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B2%97%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%8C%E4%BD%A0%E4%BC%9A%E5%81%9A%E5%87%A0%E9%81%93/" class="article-date">
+  <time datetime="2024-03-15T17:39:46.000Z" itemprop="datePublished">2024-03-16</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">7 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="米哈游一面前端开发岗面试题，你会做几道"><a href="#米哈游一面前端开发岗面试题，你会做几道" class="headerlink" title="米哈游一面前端开发岗面试题，你会做几道?"></a>米哈游一面前端开发岗面试题，你会做几道?</h1><p>这是一份米哈游前端开发岗位的面试题总结，涵盖了异步编程（<code>async/await</code>）、深拷贝问题、数组判断和手写<code>instanceof</code>方法、React的diff算法在DOM更新中的应用、HTTP请求携带cookie、跨域问题及其解决方案、Webpack的工作流程、使用Webpack的loader处理特定场景问题、ES5的继承和原型链、CommonJS与ES6模块的区别。这些问题旨在评估面试者的前端知识深度和广度，确保程序员具备解决实际开发问题的能力。</p>
+<h2 id="1-自我介绍："><a href="#1-自我介绍：" class="headerlink" title="1. 自我介绍："></a>1. 自我介绍：</h2><p>略</p>
+<h2 id="2-async-await的设计和实现："><a href="#2-async-await的设计和实现：" class="headerlink" title="2. async&#x2F;await的设计和实现："></a>2. async&#x2F;await的设计和实现：</h2><p><code>async</code>和<code>await</code>是JavaScript中用于简化异步编程的关键字。<code>async</code>声明一个函数是异步的，而<code>await</code>则用于等待一个Promise解决它的值。<code>async</code>函数隐式返回一个Promise，而<code>await</code>会暂停代码的执行，直到等待的Promise被解决或拒绝。这种设计使得异步代码看起来和同步代码类似，提高了代码的可读性和可维护性。</p>
+<h2 id="3-深拷贝需要注意哪些问题？"><a href="#3-深拷贝需要注意哪些问题？" class="headerlink" title="3. 深拷贝需要注意哪些问题？"></a>3. 深拷贝需要注意哪些问题？</h2><p>深拷贝需要注意以下几个问题：</p>
+<ul>
+<li>性能开销：深拷贝会创建对象和其所有子对象的完整副本，这可能导致性能问题。</li>
+<li>循环引用：如果对象图中存在循环引用，深拷贝可能导致无限循环。</li>
+<li>特殊对象：对于某些特殊对象（如Date、RegExp、Function等），深拷贝可能不会按预期工作。</li>
+<li>方法和属性：深拷贝可能不会复制对象的方法和访问器属性。</li>
+</ul>
+<h2 id="4-判断数组的方法有哪些？手写一个instanceof方法："><a href="#4-判断数组的方法有哪些？手写一个instanceof方法：" class="headerlink" title="4. 判断数组的方法有哪些？手写一个instanceof方法："></a>4. 判断数组的方法有哪些？手写一个instanceof方法：</h2><p>判断数组的方法包括：</p>
+<ul>
+<li><code>Array.isArray()</code></li>
+<li>使用<code>Object.prototype.toString.call()</code>方法<br>手写<code>instanceof</code>方法：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">myInstanceOf</span>(<span class="params">constructor, obj</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> obj <span class="keyword">instanceof</span> constructor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-如何借鉴React-diff算法的思想，实现各种情况下树节点的更新："><a href="#5-如何借鉴React-diff算法的思想，实现各种情况下树节点的更新：" class="headerlink" title="5. 如何借鉴React diff算法的思想，实现各种情况下树节点的更新："></a>5. 如何借鉴React diff算法的思想，实现各种情况下树节点的更新：</h2><p>React的diff算法通过比较新旧虚拟DOM树的差异来更新实际的DOM。借鉴这一思想，可以为树节点创建一个更新函数，该函数会比较新旧节点的数据和子节点，然后递归地更新需要变化的部分，从而实现高效的DOM操作。</p>
+<h2 id="6-怎么让中间页携带上cookie"><a href="#6-怎么让中间页携带上cookie" class="headerlink" title="6. 怎么让中间页携带上cookie?"></a>6. 怎么让中间页携带上cookie?</h2><p>要让中间页（例如通过JavaScript发起的HTTP请求）携带cookie，通常需要满足以下条件：</p>
+<ol>
+<li><p><strong>同源策略</strong>：默认情况下，浏览器出于安全考虑，只允许同源的页面携带cookie。如果中间页与请求的资源不是同源的，那么浏览器不会自动携带cookie。</p>
+</li>
+<li><p><strong>设置<code>withCredentials</code>属性</strong>：当使用XMLHttpRequest或Fetch API发起跨域请求时，可以设置<code>withCredentials</code>属性为<code>true</code>，这样浏览器会在请求中携带cookie。这要求服务器端也设置相应的CORS策略，允许跨域请求携带cookie。</p>
+<p>使用XMLHttpRequest的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">xhr.<span class="property">withCredentials</span> = <span class="literal">true</span>;</span><br><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;https://example.com&#x27;</span>, <span class="literal">true</span>);</span><br><span class="line">xhr.<span class="title function_">send</span>();</span><br></pre></td></tr></table></figure>
+
+<p>使用Fetch API的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;https://example.com&#x27;</span>, &#123; <span class="attr">credentials</span>: <span class="string">&#x27;include&#x27;</span> &#125;)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> response.<span class="title function_">json</span>())</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">data</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(data))</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(error));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>服务器端设置CORS</strong>：服务器端需要设置适当的CORS（跨源资源共享）响应头，允许特定的外部域携带cookie。这通常通过设置<code>Access-Control-Allow-Origin</code>和<code>Access-Control-Allow-Credentials</code>响应头来实现。</p>
+<p>例如，在Express应用中，可以使用cors中间件来简化这一过程：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> cors = <span class="built_in">require</span>(<span class="string">&#x27;cors&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>();</span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">cors</span>(&#123; <span class="attr">origin</span>: <span class="string">&#x27;https://allowed-domain.com&#x27;</span>, <span class="attr">credentials</span>: <span class="literal">true</span> &#125;));</span><br><span class="line"></span><br><span class="line"><span class="comment">// ... 其他的路由和中间件 ...</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>确保cookie设置正确</strong>：如果cookie设置有误，如<code>HttpOnly</code>标记，那么即使满足上述条件，JavaScript也无法访问这些cookie，因此它们也不会被发送。</p>
+</li>
+</ol>
+<p>出于安全考虑，只有在确实需要时才应该启用跨域请求携带cookie的功能，并且要确保相关的安全措施得到妥善实施，以防止潜在的安全风险，如CSRF攻击。</p>
+<h2 id="7-说说跨域问题："><a href="#7-说说跨域问题：" class="headerlink" title="7. 说说跨域问题："></a>7. 说说跨域问题：</h2><p>跨域问题，又称为同源策略（Same-Origin Policy），是浏览器为了保护用户安全而实施的一种安全机制。当一个域（由协议、域名和端口号组成）的网页尝试请求另一个域的资源时，就会遇到跨域问题。这种限制阻止了网页在没有明确允许的情况下访问或操作其他域的数据，从而避免了潜在的安全威胁，如数据泄露和恶意操作。</p>
+<h3 id="跨域问题的原因："><a href="#跨域问题的原因：" class="headerlink" title="跨域问题的原因："></a>跨域问题的原因：</h3><ul>
+<li><strong>不同源的资源访问</strong>：例如，<code>https://www.example.com</code> 尝试访问 <code>https://api.different.com</code> 的资源。</li>
+<li><strong>第三方脚本</strong>：当你的网页加载了来自其他源的JavaScript脚本时，这些脚本默认无法访问原始文档的DOM或Cookie。</li>
+<li><strong>AJAX请求</strong>：使用XMLHttpRequest或Fetch API发起的请求，如果目标URL与当前文档的URL不同源，请求会因为跨域而被浏览器拦截。</li>
+</ul>
+<h3 id="跨域问题的解决方案："><a href="#跨域问题的解决方案：" class="headerlink" title="跨域问题的解决方案："></a>跨域问题的解决方案：</h3><ol>
+<li><p><strong>JSONP（JSON with Padding）</strong>：</p>
+<ul>
+<li>利用<code>&lt;script&gt;</code>标签没有跨域限制的特点，可以通过动态创建<code>&lt;script&gt;</code>标签来请求跨域的JSON数据。</li>
+<li>服务器返回的数据需要被包裹在一个函数调用中，客户端提供一个回调函数来接收这些数据。</li>
+</ul>
+</li>
+<li><p><strong>CORS（跨源资源共享）</strong>：</p>
+<ul>
+<li>服务器设置特定的HTTP响应头，如<code>Access-Control-Allow-Origin</code>，来告诉浏览器允许跨域请求。</li>
+<li>可以通过设置<code>Access-Control-Allow-Methods</code>和<code>Access-Control-Allow-Headers</code>来控制允许的HTTP方法和请求头。</li>
+</ul>
+</li>
+<li><p><strong>代理服务器</strong>：</p>
+<ul>
+<li>在服务器端设置一个代理服务器，将客户端的请求先发送到代理服务器，由代理服务器转发请求到目标服务器，并将响应返回给客户端。</li>
+<li>这样，客户端和代理服务器之间不会有跨域问题，因为它们同源。</li>
+</ul>
+</li>
+<li><p><strong>PostMessage</strong>：</p>
+<ul>
+<li>这是HTML5引入的一种安全的跨域通信方式，允许不同源的窗口之间传递消息。</li>
+<li>通过<code>window.postMessage</code>方法发送消息，并在目标窗口中监听<code>message</code>事件来接收消息。</li>
+</ul>
+</li>
+<li><p><strong>WebSockets</strong>：</p>
+<ul>
+<li>WebSocket协议提供了浏览器和服务器之间的全双工通信渠道，不受限于同源策略。</li>
+<li>可以用于建立持久的连接，进行实时数据交换。</li>
+</ul>
+</li>
+<li><p><strong>修改document.domain</strong>：</p>
+<ul>
+<li>如果两个域名的主域相同（例如<code>example1.com</code>和<code>example2.com</code>），可以通过设置<code>document.domain=&#39;example.com&#39;</code>来实现跨子域的访问。</li>
+</ul>
+</li>
+<li><p><strong>使用Location Hash</strong>：</p>
+<ul>
+<li>通过在URL的哈希部分（即URL中的<code>#</code>后面的部分）传递信息，可以绕过同源策略的限制。</li>
+</ul>
+</li>
+</ol>
+<h3 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h3><ul>
+<li>在使用跨域解决方案时，需要考虑到安全性，特别是当允许跨域携带Cookie时。</li>
+<li>CORS是推荐使用的跨域解决方案，因为它提供了更多的控制和灵活性。</li>
+</ul>
+<p>跨域问题的处理需要根据具体的应用场景和技术栈来选择合适的方法。在实施任何跨域解决方案时，都应确保遵循最佳安全实践。</p>
+<h2 id="8-讲讲webpack的整个工作流程："><a href="#8-讲讲webpack的整个工作流程：" class="headerlink" title="8. 讲讲webpack的整个工作流程："></a>8. 讲讲webpack的整个工作流程：</h2><p>Webpack的工作流程包括：</p>
+<ul>
+<li>解析：读取配置文件，初始化参数。</li>
+<li>编译：从入口文件开始，递归地构建AST（抽象语法树）。</li>
+<li>模块解析：分析模块依赖，递归地找到所有模块。</li>
+<li>模块加载：使用对应的loader处理模块。</li>
+<li>输出：根据依赖关系和模块内容，生成最终的bundle文件。</li>
+</ul>
+<h2 id="9-有没有用过webpack的loader解决过一些具体的场景问题？"><a href="#9-有没有用过webpack的loader解决过一些具体的场景问题？" class="headerlink" title="9. 有没有用过webpack的loader解决过一些具体的场景问题？"></a>9. 有没有用过webpack的loader解决过一些具体的场景问题？</h2><p>例如使用<code>css-loader</code>和<code>style-loader</code>处理CSS文件，或使用<code>babel-loader</code>将ES6代码转换为ES5。</p>
+<h2 id="10-ES5怎么实现继承？讲讲对原型链的理解："><a href="#10-ES5怎么实现继承？讲讲对原型链的理解：" class="headerlink" title="10. ES5怎么实现继承？讲讲对原型链的理解："></a>10. ES5怎么实现继承？讲讲对原型链的理解：</h2><p>ES5中实现继承通常使用构造函数、原型链和混成继承。原型链是JavaScript中实现继承的机制，每个对象都有一个内部属性<code>[[Prototype]]</code>，指向它的构造函数的<code>prototype</code>属性。继承通常是通过设置子类型构造函数的原型为父类型实例来实现的。</p>
+<h2 id="11-require和import的区别？"><a href="#11-require和import的区别？" class="headerlink" title="11. require和import的区别？"></a>11. require和import的区别？</h2><p><code>require</code>是CommonJS规范中的模块加载方式，通常用于Node.js环境，而<code>import</code>是ES6模块加载的语法。<code>require</code>是同步加载模块，而<code>import</code>是异步加载，且<code>import</code>提供了更清晰的语法和静态分析能力。</p>
+<h2 id="12-有没有什么想问我的？"><a href="#12-有没有什么想问我的？" class="headerlink" title="12. 有没有什么想问我的？"></a>12. 有没有什么想问我的？</h2><p>略</p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://bestwishes0203.gitee.io/blog/2024/03/16/%E7%B1%B3%E5%93%88%E6%B8%B8%E4%B8%80%E9%9D%A2%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B2%97%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%8C%E4%BD%A0%E4%BC%9A%E5%81%9A%E5%87%A0%E9%81%93/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/blog/2024/03/16/Vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8ECharts%E6%9E%84%E5%BB%BA%E4%BA%A4%E4%BA%92%E5%BC%8F%E4%B8%AD%E5%9B%BD%E5%9C%B0%E5%9B%BE%E7%9A%84%E8%AF%A6%E7%BB%86%E6%8C%87%E5%8D%97/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Vue项目中使用ECharts构建交互式中国地图的详细指南
+          
+        </div>
+      </a>
+    
+    
+      <a href="/blog/2024/03/16/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E5%A4%87%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">程序员必备开发工具</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022-2024
+        <i class="ri-heart-fill heart_icon"></i> 何福海
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/blog/"><img src="/blog/images/ayer.png" alt="何福海的个人博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="https://wallpaper.seenav.cn/">壁纸</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/2022/01/01/%E5%85%B3%E4%BA%8E%E6%88%91/">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/blog/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯奶茶吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/blog/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/blog/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/blog/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/blog/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/blog/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/blog/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/blog/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/blog/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/blog/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/blog/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=1497588709&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="生活，旅行，思考，代码" />
+       
+      <meta name="description" content="有事者,事竟成;破釜沉舟,百二秦关终归楚;苦心人,天不负;卧薪尝胆,三千越甲可吞吴。" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>Promise技术学这篇就够了 |  何福海的个人博客</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/blog/favicon.ico" />
+       
+<link rel="stylesheet" href="/blog/dist/main.css">
+
+      
+<link rel="stylesheet" href="/blog/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/blog/css/custom.css">
+  
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/blog/atom.xml" title="何福海的个人博客" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Promise技术学这篇就够了"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Promise技术学这篇就够了
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/blog/2024/03/11/Promise%E6%8A%80%E6%9C%AF%E5%AD%A6%E8%BF%99%E7%AF%87%E5%B0%B1%E5%A4%9F%E4%BA%86/" class="article-date">
+  <time datetime="2024-03-11T06:18:01.000Z" itemprop="datePublished">2024-03-11</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">7 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="Promise技术学这篇就够了"><a href="#Promise技术学这篇就够了" class="headerlink" title="Promise技术学这篇就够了"></a>Promise技术学这篇就够了</h1><h2 id="一-Promise是什么？"><a href="#一-Promise是什么？" class="headerlink" title="一. Promise是什么？"></a>一. Promise是什么？</h2><blockquote>
+<p>Promise 是异步编程的一种解决方案，比传统的解决方案回调函数,  更合理和更强大。ES6 将其写进了语言标准，统一了用法，原生提供了Promise对象 。</p>
+</blockquote>
+<ul>
+<li><p>指定回调函数方式更灵活易懂。</p>
+</li>
+<li><p>解决异步 <strong>回调地狱</strong> 的问题。</p>
+</li>
+</ul>
+<h3 id="1-回调地狱"><a href="#1-回调地狱" class="headerlink" title="1. 回调地狱"></a>1. 回调地狱</h3><ul>
+<li><p>当一个回调函数嵌套一个回调函数的时候</p>
+</li>
+<li><p>就会出现一个嵌套结构</p>
+</li>
+<li><p>当嵌套的多了就会出现回调地狱的情况</p>
+</li>
+<li><p>比如我们发送三个 ajax 请求</p>
+<ul>
+<li>第一个正常发送</li>
+<li>第二个请求需要第一个请求的结果中的某一个值作为参数</li>
+<li>第三个请求需要第二个请求的结果中的某一个值作为参数</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">ajax</span>(&#123;</span><br><span class="line">  <span class="attr">url</span>: <span class="string">&#x27;我是第一个请求&#x27;</span>,</span><br><span class="line">  success (res) &#123;</span><br><span class="line">    <span class="comment">// 现在发送第二个请求</span></span><br><span class="line">    <span class="title function_">ajax</span>(&#123;</span><br><span class="line">      <span class="attr">url</span>: <span class="string">&#x27;我是第二个请求&#x27;</span>，</span><br><span class="line">      <span class="attr">data</span>: &#123; <span class="attr">a</span>: res.<span class="property">a</span>, <span class="attr">b</span>: res.<span class="property">b</span> &#125;,</span><br><span class="line">      success (res2) &#123;</span><br><span class="line">        <span class="comment">// 进行第三个请求</span></span><br><span class="line">        <span class="title function_">ajax</span>(&#123;</span><br><span class="line">          <span class="attr">url</span>: <span class="string">&#x27;我是第三个请求&#x27;</span>,</span><br><span class="line">          <span class="attr">data</span>: &#123; <span class="attr">a</span>: res2.<span class="property">a</span>, <span class="attr">b</span>: res2.<span class="property">b</span> &#125;,</span><br><span class="line">  				success (res3) &#123; </span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(res3) </span><br><span class="line">          &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>回调地狱，其实就是回调函数嵌套过多导致的</strong></p>
+</li>
+<li><p>当代码成为这个结构以后，已经没有维护的可能了</p>
+</li>
+</ul>
+<h2 id="二-Promise使用"><a href="#二-Promise使用" class="headerlink" title="二. Promise使用"></a>二. Promise使用</h2><ul>
+<li><p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span> (<span class="params">resolve, reject</span>) &#123;</span><br><span class="line">  <span class="comment">// resolve 表示成功的回调</span></span><br><span class="line">  <span class="comment">// reject 表示失败的回调</span></span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params">res</span>) &#123;</span><br><span class="line">  <span class="comment">// 成功的函数</span></span><br><span class="line">&#125;).<span class="title function_">catch</span>(<span class="keyword">function</span> (<span class="params">err</span>) &#123;</span><br><span class="line">  <span class="comment">// 失败的函数</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="三-Promise-对象的状态"><a href="#三-Promise-对象的状态" class="headerlink" title="三. Promise 对象的状态"></a>三. Promise 对象的状态</h2><p>Promise 对象通过自身的状态，来控制异步操作。Promise 实例具有三种状态。</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">异步操作未完成（pending）</span><br><span class="line">异步操作成功（fulfilled）</span><br><span class="line">异步操作失败（rejected）</span><br></pre></td></tr></table></figure>
+
+<p>这三种的状态的变化途径只有两种。</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">从“未完成”到“成功”</span><br><span class="line">从“未完成”到“失败”</span><br></pre></td></tr></table></figure>
+
+<p>一旦状态发生变化，就凝固了，不会再有新的状态变化。这也是 Promise 这个名字的由来，它的英语意思是“承诺”，一旦承诺成效，就不得再改变了。这也意味着，Promise 实例的状态变化只可能发生一次。</p>
+<p>因此，Promise 的最终结果只有两种。</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">异步操作成功，Promise 实例传回一个值（value），状态变为fulfilled。</span><br><span class="line">异步操作失败，Promise 实例抛出一个错误（error），状态变为rejected。</span><br></pre></td></tr></table></figure>
+
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-Nyb6AdTk-1680683483530)(%E7%AC%94%E8%AE%B0.assets&#x2F;image-20220902141409899.png)]</p>
+<h2 id="四-Promise对象方法"><a href="#四-Promise对象方法" class="headerlink" title="四.Promise对象方法"></a>四.Promise对象方法</h2><blockquote>
+<p>Promise 是一个对象，也是一个构造函数。</p>
+</blockquote>
+<h3 id="1-Promise-resolve"><a href="#1-Promise-resolve" class="headerlink" title="1.Promise.resolve"></a>1.Promise.resolve</h3><p>将现有对象转为 Promise 对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Promise</span>.<span class="title function_">resolve</span>(<span class="string">&#x27;kerwin&#x27;</span>)</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> <span class="title function_">resolve</span>(<span class="string">&#x27;kerwin&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-Promise-reject"><a href="#2-Promise-reject" class="headerlink" title="2.Promise.reject"></a>2.Promise.reject</h3><p><code>Promise.reject(reason)</code>方法也会返回一个新的 Promise 实例，该实例的状态为<code>rejected</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="title class_">Promise</span>.<span class="title function_">reject</span>(<span class="string">&#x27;error&#x27;</span>);</span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> <span class="title function_">reject</span>(<span class="string">&#x27;error&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Promise-all"><a href="#3-Promise-all" class="headerlink" title="3.Promise.all"></a>3.Promise.all</h3><p><code>Promise.all()</code>方法用于将多个 Promise 实例，包装成一个新的 Promise 实例。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="title class_">Promise</span>.<span class="title function_">all</span>([p1, p2, p3]);</span><br></pre></td></tr></table></figure>
+
+<p>p的状态由p1,p2,p3 决定，分成两种情况。</p>
+<p>（1）只有<code>p1</code>、<code>p2</code>、<code>p3</code>的状态都变成<code>fulfilled</code>，<code>p</code>的状态才会变成<code>fulfilled</code>，此时<code>p1</code>、<code>p2</code>、<code>p3</code>的返回值组成一个数组，传递给<code>p</code>的回调函数。</p>
+<p>（2）只要<code>p1</code>、<code>p2</code>、<code>p3</code>之中有一个被<code>rejected</code>，<code>p</code>的状态就变成<code>rejected</code>，此时第一个被<code>reject</code>的实例的返回值，会传递给<code>p</code>的回调函数。</p>
+<h3 id="4-Promise-race"><a href="#4-Promise-race" class="headerlink" title="4.Promise.race"></a>4.Promise.race</h3><p><code>Promise.race()</code>方法同样是将多个 Promise 实例，包装成一个新的 Promise 实例。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="title class_">Promise</span>.<span class="title function_">race</span>([p1, p2, p3]);</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，只要<code>p1</code>、<code>p2</code>、<code>p3</code>之中有一个实例率先改变状态，<code>p</code>的状态就跟着改变。那个率先改变的 Promise 实例的返回值，就传递给<code>p</code>的回调函数。</p>
+<h3 id="5-Promise-allSettled"><a href="#5-Promise-allSettled" class="headerlink" title="5.Promise.allSettled"></a>5.Promise.allSettled</h3><p><code>Promise.allSettled()</code>方法，用来确定一组异步操作是否都结束了（不管成功或失败）。所以，它的名字叫做”Settled“，包含了”fulfilled“和”rejected“两种情况。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promises = [ <span class="title function_">ajax</span>(<span class="string">&#x27;/200接口&#x27;</span>), <span class="title function_">ajax</span>(<span class="string">&#x27;/401接口&#x27;</span>) ];</span><br><span class="line"></span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">allSettled</span>(promises).<span class="title function_">then</span>(<span class="function"><span class="params">results</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">// 过滤出成功的请求</span></span><br><span class="line">    results.<span class="title function_">filter</span>(<span class="function"><span class="params">item</span> =&gt;</span>item.<span class="property">status</span> === <span class="string">&#x27;fulfilled&#x27;</span>);</span><br><span class="line">    过滤出失败的请求</span><br><span class="line">    results.<span class="title function_">filter</span>(<span class="function"><span class="params">item</span>=&gt;</span> item.<span class="property">status</span> === <span class="string">&#x27;rejected&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-Promise-any"><a href="#6-Promise-any" class="headerlink" title="6.Promise.any"></a>6.Promise.any</h3><p>只要参数实例有一个变成<code>fulfilled</code>状态，包装实例就会变成<code>fulfilled</code>状态；如果所有参数实例都变成<code>rejected</code>状态，包装实例就会变成<code>rejected</code>状态。</p>
+<blockquote>
+<p><code>Promise.any()</code>跟<code>Promise.race()</code>方法很像，只有一点不同，就是<code>Promise.any()</code>不会因为某个 Promise 变成<code>rejected</code>状态而结束，必须等到所有参数 Promise 变成<code>rejected</code>状态才会结束。</p>
+</blockquote>
+<h2 id="五-手写Promise"><a href="#五-手写Promise" class="headerlink" title="五.手写Promise"></a>五.手写Promise</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">KerwinPromise</span>(<span class="params">executor</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">status</span> = <span class="string">&quot;pending&quot;</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">result</span> = <span class="literal">undefined</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">cb</span> = []</span><br><span class="line">    <span class="keyword">var</span> _this = <span class="variable language_">this</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">resolve</span>(<span class="params">res</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (_this.<span class="property">status</span> !== <span class="string">&quot;pending&quot;</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">// console.log(_this)</span></span><br><span class="line">        _this.<span class="property">status</span> = <span class="string">&quot;fulfilled&quot;</span></span><br><span class="line">        _this.<span class="property">result</span> = res;</span><br><span class="line"></span><br><span class="line">        _this.<span class="property">cb</span>.<span class="title function_">forEach</span>(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">            item.<span class="property">successCB</span> &amp;&amp; item.<span class="title function_">successCB</span>(_this.<span class="property">result</span>)</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">reject</span>(<span class="params">res</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (_this.<span class="property">status</span> !== <span class="string">&quot;pending&quot;</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">// console.log(&quot;reject&quot;)</span></span><br><span class="line">        _this.<span class="property">status</span> = <span class="string">&quot;rejected&quot;</span></span><br><span class="line">        _this.<span class="property">result</span> = res;</span><br><span class="line">        _this.<span class="property">cb</span>.<span class="title function_">forEach</span>(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">            item.<span class="property">failCB</span> &amp;&amp; item.<span class="title function_">failCB</span>(_this.<span class="property">result</span>)</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">executor</span>(resolve, reject)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">KerwinPromise</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">then</span> = <span class="keyword">function</span> (<span class="params">successCB, failCB</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(!successCB)&#123;</span><br><span class="line">        successCB = <span class="function"><span class="params">value</span>=&gt;</span>value</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!failCB)&#123;</span><br><span class="line">        failCB = <span class="function"><span class="params">error</span>=&gt;</span>error</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// successCB()</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">KerwinPromise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">status</span> === <span class="string">&quot;fulfilled&quot;</span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> result = successCB &amp;&amp; <span class="title function_">successCB</span>(<span class="variable language_">this</span>.<span class="property">result</span>)</span><br><span class="line">            <span class="comment">// console.log(result);</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (result <span class="keyword">instanceof</span> <span class="title class_">KerwinPromise</span>) &#123;</span><br><span class="line">                result.<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="comment">// console.log(res)</span></span><br><span class="line">                    <span class="title function_">resolve</span>(res);</span><br><span class="line">                &#125;, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="comment">// console.log(err)</span></span><br><span class="line">                    <span class="title function_">reject</span>(err)</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="title function_">resolve</span>(result);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">status</span> === <span class="string">&quot;rejected&quot;</span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> result = failCB &amp;&amp; <span class="title function_">failCB</span>(<span class="variable language_">this</span>.<span class="property">result</span>)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (result <span class="keyword">instanceof</span> <span class="title class_">KerwinPromise</span>) &#123;</span><br><span class="line">                result.<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="comment">// console.log(res)</span></span><br><span class="line">                    <span class="title function_">resolve</span>(res);</span><br><span class="line">                &#125;, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="comment">// console.log(err)</span></span><br><span class="line">                    <span class="title function_">reject</span>(err)</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="title function_">reject</span>(result);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">status</span> === <span class="string">&quot;pending&quot;</span>) &#123;</span><br><span class="line">            <span class="comment">//收集回调</span></span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">cb</span>.<span class="title function_">push</span>(&#123;</span><br><span class="line">                <span class="attr">successCB</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">var</span> result = successCB &amp;&amp; <span class="title function_">successCB</span>(<span class="variable language_">this</span>.<span class="property">result</span>)</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">if</span> (result <span class="keyword">instanceof</span> <span class="title class_">KerwinPromise</span>) &#123;</span><br><span class="line">                        result.<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">                            <span class="comment">// console.log(res)</span></span><br><span class="line">                            <span class="title function_">resolve</span>(res);</span><br><span class="line">                        &#125;, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">                            <span class="comment">// console.log(err)</span></span><br><span class="line">                            <span class="title function_">reject</span>(err)</span><br><span class="line">                        &#125;)</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="title function_">resolve</span>(result);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">failCB</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">var</span> result = failCB &amp;&amp; <span class="title function_">failCB</span>(<span class="variable language_">this</span>.<span class="property">result</span>)</span><br><span class="line">                    <span class="keyword">if</span> (result <span class="keyword">instanceof</span> <span class="title class_">KerwinPromise</span>) &#123;</span><br><span class="line">                        result.<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">                            <span class="comment">// console.log(res)</span></span><br><span class="line">                            <span class="title function_">resolve</span>(res);</span><br><span class="line">                        &#125;, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">                            <span class="comment">// console.log(err)</span></span><br><span class="line">                            <span class="title function_">reject</span>(err)</span><br><span class="line">                        &#125;)</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="title function_">reject</span>(result);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">KerwinPromise</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">catch</span>= <span class="keyword">function</span>(<span class="params">failCB</span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">then</span>(<span class="literal">undefined</span>,failCB)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="六-Async与Await"><a href="#六-Async与Await" class="headerlink" title="六.Async与Await"></a>六.Async与Await</h2><h3 id="1-Async"><a href="#1-Async" class="headerlink" title="1.Async"></a>1.Async</h3><p>async 函数，使得异步操作变得更加方便。</p>
+<ul>
+<li>更好的语义。</li>
+<li>返回值是 Promise。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">test</span>(<span class="params"></span>)&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">test</span>()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-Await"><a href="#2-Await" class="headerlink" title="2.Await"></a>2.Await</h3><p><code>await</code>命令后面是一个 Promise 对象，返回该对象的结果。如果不是 Promise 对象，就直接返回对应的值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">test</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> res1 =  <span class="keyword">await</span> <span class="title function_">ajax</span>(<span class="string">&quot;http://localhost:3000/news1&quot;</span>)</span><br><span class="line">    <span class="keyword">var</span> res2 =  <span class="keyword">await</span> <span class="title function_">ajax</span>(<span class="string">&quot;http://localhost:3000/news2&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> res2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">test</span>().<span class="title function_">then</span>(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;返回结果&quot;</span>,res)</span><br><span class="line">&#125;).<span class="title function_">catch</span>(<span class="function"><span class="params">err</span>=&gt;</span>&#123;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;err&quot;</span>,err)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-错误处理"><a href="#3-错误处理" class="headerlink" title="3.错误处理"></a>3.错误处理</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> res1 =  <span class="keyword">await</span> <span class="title function_">ajax</span>(<span class="string">&quot;http://localhost:3000/news1&quot;</span>)</span><br><span class="line">    <span class="keyword">var</span> res2 =  <span class="keyword">await</span> <span class="title function_">ajax</span>(<span class="string">&quot;http://localhost:3000/news2&quot;</span>)</span><br><span class="line">&#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;err&quot;</span>,err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong><strong>如果对你有帮助，点赞、收藏、关注是我更新的动力！👋🌟🚀</strong></strong></p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://bestwishes0203.gitee.io/blog/2024/03/11/Promise%E6%8A%80%E6%9C%AF%E5%AD%A6%E8%BF%99%E7%AF%87%E5%B0%B1%E5%A4%9F%E4%BA%86/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/blog/2024/03/11/Ubuntu%E4%B8%8A%E8%BF%90%E8%A1%8Cc%E8%AF%AD%E8%A8%80%E6%95%99%E7%A8%8B/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Ubuntu上运行c语言教程
+          
+        </div>
+      </a>
+    
+    
+      <a href="/blog/2024/03/11/%E6%89%93%E5%AD%97%E9%80%9A%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B%EF%BC%9A%E7%94%A8HTML5%E5%92%8CJavaScript%E6%8F%90%E5%8D%87%E6%89%93%E5%AD%97%E9%80%9F%E5%BA%A6/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">打字通小游戏制作教程：用HTML5和JavaScript提升打字速度</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022-2024
+        <i class="ri-heart-fill heart_icon"></i> 何福海
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/blog/"><img src="/blog/images/ayer.png" alt="何福海的个人博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="https://wallpaper.seenav.cn/">壁纸</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/2022/01/01/%E5%85%B3%E4%BA%8E%E6%88%91/">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/blog/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯奶茶吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/blog/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/blog/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/blog/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/blog/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/blog/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/blog/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/blog/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/blog/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/blog/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/blog/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=1497588709&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

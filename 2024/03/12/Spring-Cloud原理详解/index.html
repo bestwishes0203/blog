@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="生活，旅行，思考，代码" />
+       
+      <meta name="description" content="有事者,事竟成;破釜沉舟,百二秦关终归楚;苦心人,天不负;卧薪尝胆,三千越甲可吞吴。" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>Spring Cloud原理详解 |  何福海的个人博客</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/blog/favicon.ico" />
+       
+<link rel="stylesheet" href="/blog/dist/main.css">
+
+      
+<link rel="stylesheet" href="/blog/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/blog/css/custom.css">
+  
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/blog/atom.xml" title="何福海的个人博客" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Spring-Cloud原理详解"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Spring Cloud原理详解
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/blog/2024/03/12/Spring-Cloud%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/" class="article-date">
+  <time datetime="2024-03-12T01:26:36.000Z" itemprop="datePublished">2024-03-12</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">7 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="Spring-Cloud原理详解"><a href="#Spring-Cloud原理详解" class="headerlink" title="Spring Cloud原理详解"></a>Spring Cloud原理详解</h1><h2 id="Spring-Cloud是什么？"><a href="#Spring-Cloud是什么？" class="headerlink" title="Spring Cloud是什么？"></a>Spring Cloud是什么？</h2><p><code>Spring Cloud</code> 是一个基于<code>Spring Boot</code>实现的云应用开发工具，它为基于JVM的云应用开发中涉及的配置管理、服务发现、断路器、智能路由、微代理、事件总线、全局锁、决策竞选、分布式会话等操作提供了一种简单的开发方式。</p>
+<p><a target="_blank" rel="noopener" href="https://spring.io/projects/spring-cloud">Spring Cloud官网</a><br><img src="https://img-blog.csdnimg.cn/direct/fa8d5d05d5fb4e3897693ed024c4742b.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="Spring-Boot是什么"><a href="#Spring-Boot是什么" class="headerlink" title="Spring Boot是什么"></a>Spring Boot是什么</h2><p>Spring Boot是一个开源的Java基础框架，旨在简化Spring应用的创建和开发过程。它是基于Spring框架的一个模块，提供了一种快速、便捷的方式来开发基于Spring的应用程序。Spring Boot的主要目标是减少配置和部署的复杂性，使得开发者可以轻松地创建独立的、生产级别的基于Spring的应用程序。</p>
+<h3 id="核心特性"><a href="#核心特性" class="headerlink" title="核心特性"></a>核心特性</h3><ol>
+<li><p><strong>自动配置</strong>：Spring Boot通过自动配置机制减少了显式配置的需求。它能够根据项目中的jar依赖自动配置Spring和第三方库。</p>
+</li>
+<li><p><strong>独立运行</strong>：Spring Boot应用程序可以打包成一个独立的JAR文件，这个JAR文件包含了所有必要的依赖项，可以直接运行，无需部署到外部的应用服务器。</p>
+</li>
+<li><p><strong>内嵌服务器</strong>：Spring Boot内嵌了Tomcat、Jetty或Undertow等Servlet容器，无需额外安装Web服务器即可运行Web应用。</p>
+</li>
+<li><p><strong>生产就绪</strong>：Spring Boot提供了各种生产级别的特性，如健康检查、度量信息收集、外部化配置等，以便于监控和管理应用程序。</p>
+</li>
+<li><p><strong>无代码生成和XML配置</strong>：Spring Boot不需要生成大量的样板代码，也不需要复杂的XML配置文件，大多数情况下使用注解和一些属性文件即可完成配置。</p>
+</li>
+<li><p><strong>微服务支持</strong>：Spring Boot与Spring Cloud紧密集成，支持构建微服务架构的应用，提供了服务发现、配置管理、负载均衡等微服务相关的功能。</p>
+</li>
+</ol>
+<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><ul>
+<li><strong>快速开发</strong>：Spring Boot的约定优于配置的原则使得开发者可以快速搭建和运行Spring应用程序。</li>
+<li><strong>简化部署</strong>：独立的JAR文件使得部署变得简单，可以直接通过Java命令运行，也可以打包为Docker容器。</li>
+<li><strong>社区支持</strong>：Spring Boot由一个活跃的社区支持，有大量的文档、教程和第三方库可供选择。</li>
+<li><strong>灵活性</strong>：虽然Spring Boot提供了默认配置，但它同样支持高度定制化，满足复杂应用的需求。</li>
+</ul>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>Spring Boot适用于各种类型的Java应用程序，包括Web应用、RESTful API、微服务、数据访问应用等。它特别适合于快速原型开发和中小型项目，但也可以用于大型企业级应用的开发。</p>
+<h2 id="Spring-Cloud发展历程"><a href="#Spring-Cloud发展历程" class="headerlink" title="Spring Cloud发展历程"></a>Spring Cloud发展历程</h2><p>Spring Cloud的发展史是与Spring框架的演进紧密相连的。</p>
+<h3 id="2003年-Spring框架的诞生"><a href="#2003年-Spring框架的诞生" class="headerlink" title="2003年 - Spring框架的诞生"></a>2003年 - Spring框架的诞生</h3><p>Spring框架最初由Rod Johnson创建，并在2003年发布。它旨在简化Java EE开发，通过提供全面的编程和配置模型来解决企业级应用开发的复杂性。</p>
+<h3 id="2013年-Spring-Boot的发布"><a href="#2013年-Spring-Boot的发布" class="headerlink" title="2013年 - Spring Boot的发布"></a>2013年 - Spring Boot的发布</h3><p>随着时间的推移，Spring生态系统变得越来越庞大，配置也变得越来越复杂。为了简化Spring应用的创建和部署，Pivotal团队在2013年推出了Spring Boot，它通过提供默认配置来简化Spring应用的开发。</p>
+<h3 id="2014年-Spring-Cloud的初步形成"><a href="#2014年-Spring-Cloud的初步形成" class="headerlink" title="2014年 - Spring Cloud的初步形成"></a>2014年 - Spring Cloud的初步形成</h3><p>随着微服务架构的流行，开发者需要一套工具来帮助他们在云环境中构建和管理分布式系统。Spring Cloud在2014年左右开始形成，它提供了一系列框架来支持微服务架构模式。</p>
+<h3 id="2015年-Spring-Cloud的稳定发展"><a href="#2015年-Spring-Cloud的稳定发展" class="headerlink" title="2015年 - Spring Cloud的稳定发展"></a>2015年 - Spring Cloud的稳定发展</h3><p>Spring Cloud发布了多个子项目，如Spring Cloud Config、Spring Cloud Netflix Eureka、Spring Cloud Hystrix等，这些项目帮助开发者解决了配置管理、服务发现、断路器等问题。</p>
+<h3 id="2016年-Spring-Cloud的成熟"><a href="#2016年-Spring-Cloud的成熟" class="headerlink" title="2016年 - Spring Cloud的成熟"></a>2016年 - Spring Cloud的成熟</h3><p>Spring Cloud继续扩展，引入了更多的项目，如Spring Cloud Stream、Spring Cloud Function等，同时，Spring Cloud Netflix项目也得到了进一步的发展和完善。</p>
+<h3 id="2017年-服务网格的探索"><a href="#2017年-服务网格的探索" class="headerlink" title="2017年 - 服务网格的探索"></a>2017年 - 服务网格的探索</h3><p>随着服务网格架构的兴起，Spring Cloud开始探索如何将服务网格技术与Spring Cloud集成，以便更好地支持微服务的监控、安全和流量控制。</p>
+<h3 id="2018年-Spring-Cloud的整合与演进"><a href="#2018年-Spring-Cloud的整合与演进" class="headerlink" title="2018年 - Spring Cloud的整合与演进"></a>2018年 - Spring Cloud的整合与演进</h3><p>Spring Cloud发布了Spring Cloud Data Flow，用于简化数据驱动的微服务应用的开发。同时，Spring Cloud也整合了Spring Security，提供了更全面的安全解决方案。</p>
+<h3 id="2019年-向Serverless的转变"><a href="#2019年-向Serverless的转变" class="headerlink" title="2019年 - 向Serverless的转变"></a>2019年 - 向Serverless的转变</h3><p>随着云原生技术的发展，Spring Cloud开始支持Serverless架构，发布了Spring Cloud Function for Kubernetes，使得开发者可以在Kubernetes上以无服务器（Serverless）的方式运行Spring Boot函数。</p>
+<h3 id="2020年至今-持续创新与适应"><a href="#2020年至今-持续创新与适应" class="headerlink" title="2020年至今 - 持续创新与适应"></a>2020年至今 - 持续创新与适应</h3><p>Spring Cloud持续创新，适应新的技术和趋势，如增强对Spring Native的支持，使得Spring应用可以编译为本地二进制文件，提高启动速度和运行效率。同时，Spring Cloud也继续扩展其对云原生和微服务的支持。</p>
+<p>Spring Cloud的发展史是不断适应新的技术挑战和市场需求的历史。随着云计算和微服务架构的不断演进，Spring Cloud也在不断地更新和扩展其项目，以帮助开发者构建更加灵活、可扩展和可维护的云原生应用。</p>
+<h2 id="Spring-Cloud核心组件"><a href="#Spring-Cloud核心组件" class="headerlink" title="Spring Cloud核心组件"></a>Spring Cloud核心组件</h2><ol>
+<li><p><strong>Spring Cloud Config</strong>：</p>
+<ul>
+<li>用于配置管理，支持集中化外部配置。可以存储配置信息并在运行时动态更新，支持不同环境（开发、测试、生产）的配置信息。</li>
+</ul>
+</li>
+<li><p><strong>Spring Cloud Netflix Eureka</strong>：</p>
+<ul>
+<li>服务注册与发现机制，提供服务注册中心，允许微服务应用进行注册和发现。Eureka Client用于服务的注册与注销，Eureka Server用于服务的注册信息管理和服务发现。</li>
+</ul>
+</li>
+<li><p><strong>Spring Cloud Netflix Ribbon</strong>：</p>
+<ul>
+<li>客户端负载均衡器，提供基于HTTP和TCP的客户端负载均衡算法。Ribbon与Eureka结合使用，可以实现服务调用时的负载均衡。</li>
+</ul>
+</li>
+<li><p><strong>Spring Cloud Netflix Hystrix</strong>：</p>
+<ul>
+<li>断路器模式的实现，防止服务雪崩效应。当某个服务出现故障时，Hystrix可以快速失败或提供备选响应，而不是长时间的等待或重试。</li>
+</ul>
+</li>
+<li><p><strong>Spring Cloud Zuul</strong>：</p>
+<ul>
+<li>动态路由，用于API网关服务，提供请求路由、过滤和安全控制。Zuul可以与Ribbon和Eureka结合，实现请求的负载均衡和服务发现。</li>
+</ul>
+</li>
+<li><p><strong>Spring Cloud Bus</strong>：</p>
+<ul>
+<li>事件、消息总线，用于传播服务间的事件和状态变化。结合Spring Cloud Config可以实现配置的动态刷新。</li>
+</ul>
+</li>
+<li><p><strong>Spring Cloud Security</strong>：</p>
+<ul>
+<li>安全管理，提供认证和授权的支持。可以集成OAuth2、LDAP等安全机制，保护微服务的安全性。</li>
+</ul>
+</li>
+<li><p><strong>Spring Cloud Stream</strong>：</p>
+<ul>
+<li>消息驱动的微服务框架，用于构建基于消息的异步系统。支持与外部消息中间件（如RabbitMQ、Kafka）的集成。</li>
+</ul>
+</li>
+<li><p><strong>Spring Cloud Sleuth</strong>：</p>
+<ul>
+<li>分布式跟踪，支持跨服务的请求链路追踪。通常与Zipkin或ELK Stack结合使用，以监控和分析微服务的调用链。</li>
+</ul>
+</li>
+</ol>
+<h2 id="Spring-Cloud工作原理"><a href="#Spring-Cloud工作原理" class="headerlink" title="Spring Cloud工作原理"></a>Spring Cloud工作原理</h2><ol>
+<li><p><strong>服务注册与发现</strong>：</p>
+<ul>
+<li>微服务启动时，向Eureka Server注册自己的信息。</li>
+<li>服务之间通过Eureka Server查询其他服务的实例列表和地址。</li>
+</ul>
+</li>
+<li><p><strong>客户端负载均衡</strong>：</p>
+<ul>
+<li>Ribbon客户端通过Eureka获取服务实例列表，并根据负载均衡策略选择一个实例进行调用。</li>
+</ul>
+</li>
+<li><p><strong>断路器</strong>：</p>
+<ul>
+<li>Hystrix监控服务调用的成功率和响应时间，当失败率过高或响应时间过长时，会自动切换到断路状态，避免进一步的调用。</li>
+</ul>
+</li>
+<li><p><strong>API网关</strong>：</p>
+<ul>
+<li>Zuul作为API网关，统一处理所有服务的请求，提供路由、过滤和安全控制。</li>
+</ul>
+</li>
+<li><p><strong>配置管理</strong>：</p>
+<ul>
+<li>应用启动时从Config Server获取配置信息。</li>
+<li>当配置信息发生变化时，通过Bus广播给所有订阅的服务，实现配置的动态更新。</li>
+</ul>
+</li>
+<li><p><strong>消息驱动</strong>：</p>
+<ul>
+<li>应用通过Stream框架发布和消费消息，实现服务间的异步通信。</li>
+</ul>
+</li>
+<li><p><strong>分布式跟踪</strong>：</p>
+<ul>
+<li>Sleuth生成和传播跟踪ID，通过Zipkin实现跨服务调用的链路追踪。</li>
+</ul>
+</li>
+</ol>
+<p>Spring Cloud通过这些组件和机制，简化了微服务架构下的应用开发、部署和运维。开发者可以利用Spring Cloud快速构建出弹性、可扩展和可维护的云原生应用。</p>
+<p><strong><strong>如果对你有帮助，点赞、收藏、关注是我更新的动力！👋🌟🚀</strong></strong></p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://bestwishes0203.gitee.io/blog/2024/03/12/Spring-Cloud%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Spring-Cloud/" rel="tag">Spring Cloud</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/blog/2024/03/13/Spring-Boot-Vue%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Spring Boot+Vue前后端分离项目如何部署到服务器
+          
+        </div>
+      </a>
+    
+    
+      <a href="/blog/2024/03/12/%E7%88%AC%E8%99%AB%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%E4%BB%8B%E7%BB%8D%E3%80%81%E5%AE%9E%E7%8E%B0%E5%8F%8A%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%81%E7%88%AC%E8%99%AB%E5%AE%9E%E6%88%98%E3%80%81%E7%88%AC%E5%8F%96%E7%BB%8F%E5%85%B8moba%E6%B8%B8%E6%88%8F%E8%8B%B1%E9%9B%84%E5%88%97%E8%A1%A8/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">爬虫基本原理介绍、实现及问题解决、爬虫实战、爬取经典moba游戏英雄列表</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022-2024
+        <i class="ri-heart-fill heart_icon"></i> 何福海
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/blog/"><img src="/blog/images/ayer.png" alt="何福海的个人博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="https://wallpaper.seenav.cn/">壁纸</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/2022/01/01/%E5%85%B3%E4%BA%8E%E6%88%91/">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/blog/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯奶茶吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/blog/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/blog/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/blog/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/blog/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/blog/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/blog/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/blog/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/blog/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/blog/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/blog/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=1497588709&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

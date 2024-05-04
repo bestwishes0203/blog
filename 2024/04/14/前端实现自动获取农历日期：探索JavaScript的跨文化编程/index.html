@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="生活，旅行，思考，代码" />
+       
+      <meta name="description" content="有事者,事竟成;破釜沉舟,百二秦关终归楚;苦心人,天不负;卧薪尝胆,三千越甲可吞吴。" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>前端实现自动获取农历日期：探索JavaScript的跨文化编程 |  何福海的个人博客</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/blog/favicon.ico" />
+       
+<link rel="stylesheet" href="/blog/dist/main.css">
+
+      
+<link rel="stylesheet" href="/blog/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/blog/css/custom.css">
+  
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/blog/atom.xml" title="何福海的个人博客" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-前端实现自动获取农历日期：探索JavaScript的跨文化编程"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  前端实现自动获取农历日期：探索JavaScript的跨文化编程
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/blog/2024/04/14/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%8E%B7%E5%8F%96%E5%86%9C%E5%8E%86%E6%97%A5%E6%9C%9F%EF%BC%9A%E6%8E%A2%E7%B4%A2JavaScript%E7%9A%84%E8%B7%A8%E6%96%87%E5%8C%96%E7%BC%96%E7%A8%8B/" class="article-date">
+  <time datetime="2024-04-13T17:05:01.000Z" itemprop="datePublished">2024-04-14</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">8 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="前端实现自动获取农历日期：探索JavaScript的跨文化编程"><a href="#前端实现自动获取农历日期：探索JavaScript的跨文化编程" class="headerlink" title="前端实现自动获取农历日期：探索JavaScript的跨文化编程"></a>前端实现自动获取农历日期：探索JavaScript的跨文化编程</h1><p>在全球化的今天，编写能够适应不同文化和地区的软件变得尤为重要。JavaScript作为前端开发的核心语言，不仅能够处理日常的交互逻辑，还能实现一些特定文化的日期计算，例如农历日期。本文将介绍如何使用JavaScript在前端自动获取并展示当前的农历日期，同时扩展我们的知识面，探索跨文化编程的重要性。</p>
+<h2 id="JavaScript在跨文化编程中的作用"><a href="#JavaScript在跨文化编程中的作用" class="headerlink" title="JavaScript在跨文化编程中的作用"></a>JavaScript在跨文化编程中的作用</h2><p>JavaScript是一种动态、弱类型、基于原型的轻量级编程语言，它在网页上实现了交互性，使得网页从静态文档变成了可以与用户进行复杂交互的动态应用。在跨文化编程中，JavaScript的灵活性和广泛的浏览器支持使其成为实现文化相关功能的理想选择。</p>
+<h3 id="1-国际化和本地化"><a href="#1-国际化和本地化" class="headerlink" title="1. 国际化和本地化"></a>1. 国际化和本地化</h3><p>JavaScript可以处理不同语言和地区的日期、货币、数字格式等，通过内置的<code>Intl</code>对象，开发者可以轻松实现国际化（Internationalization）和本地化（Localization）。</p>
+<h3 id="2-文化敏感的UI设计"><a href="#2-文化敏感的UI设计" class="headerlink" title="2. 文化敏感的UI设计"></a>2. 文化敏感的UI设计</h3><p>通过JavaScript，开发者可以根据用户的文化背景动态调整UI元素，例如使用适当的日期选择器、显示正确的货币符号等。</p>
+<h3 id="3-时区处理"><a href="#3-时区处理" class="headerlink" title="3. 时区处理"></a>3. 时区处理</h3><p>JavaScript能够处理时区转换，这对于创建需要考虑不同时区的应用程序（如在线会议调度工具）至关重要。</p>
+<h2 id="实现自动获取农历日期"><a href="#实现自动获取农历日期" class="headerlink" title="实现自动获取农历日期"></a>实现自动获取农历日期</h2><p>以下是一个简单的JavaScript函数，用于获取并返回当前日期对应的农历信息。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getLunar</span>(<span class="params">newDate</span>) &#123;</span><br><span class="line">    <span class="comment">// ... 省略部分代码 ...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Draw</span>(); <span class="comment">// 调用Draw函数返回农历信息</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getDate</span>(<span class="params">date</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> year = date.<span class="title function_">getFullYear</span>();</span><br><span class="line">    <span class="keyword">let</span> month = date.<span class="title function_">getMonth</span>() + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">let</span> day = date.<span class="title function_">getDate</span>();</span><br><span class="line">    <span class="keyword">return</span> year + <span class="string">&#x27;-&#x27;</span> + month + <span class="string">&#x27;-&#x27;</span> + day;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">getLunar</span>(<span class="title function_">getDate</span>(<span class="keyword">new</span> <span class="title class_">Date</span>())); <span class="comment">// 调用getLunar函数获取当前农历日期</span></span><br></pre></td></tr></table></figure>
+
+<p>这个函数首先定义了一系列变量和辅助函数，然后通过<code>Lunar</code>类计算农历日期。最后，<code>Draw</code>函数将农历月份和日期格式化为字符串并返回。</p>
+<h3 id="兼容性和性能考虑"><a href="#兼容性和性能考虑" class="headerlink" title="兼容性和性能考虑"></a>兼容性和性能考虑</h3><p>在实现农历日期计算时，需要考虑不同浏览器的兼容性。上述代码主要针对现代浏览器，对于旧版浏览器可能需要额外的polyfill或转译。同时，考虑到性能，复杂的日期计算最好在页面加载时进行，避免频繁的计算和DOM操作。</p>
+<h2 id="全部代码"><a href="#全部代码" class="headerlink" title="全部代码"></a>全部代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取某个日期的农历</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@parmas</span> &#123;<span class="type">newDate</span>&#125; 日期 年-月-日</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getLunar</span>(<span class="params">newDate</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> nyear;</span><br><span class="line">    <span class="keyword">var</span> nmonth;</span><br><span class="line">    <span class="keyword">var</span> nday = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">var</span> nwday;</span><br><span class="line">    <span class="keyword">var</span> nhrs;</span><br><span class="line">    <span class="keyword">var</span> nmin;</span><br><span class="line">    <span class="keyword">var</span> nsec;</span><br><span class="line">    <span class="keyword">var</span> newDate = newDate;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> lmonth, lday, lleap; <span class="comment">//农历参数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">Draw</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="title class_">NewTick</span>();</span><br><span class="line">        <span class="comment">//显示时间</span></span><br><span class="line">        <span class="keyword">var</span> s = nyear + <span class="string">&#x27;年&#x27;</span> + nmonth + <span class="string">&#x27;月&#x27;</span> + nday + <span class="string">&#x27;日 &#x27;</span> + <span class="string">&#x27;星期&#x27;</span> + <span class="title function_">cweekday</span>(nwday) + <span class="string">&#x27; &#x27;</span> + <span class="title function_">shapetime</span>(nhrs, nmin, nsec);</span><br><span class="line">        s += <span class="string">&quot; 农历&quot;</span> + lmonth + <span class="string">&quot;月&quot;</span> + lday; <span class="comment">//农历</span></span><br><span class="line">        <span class="keyword">var</span> lunar_month_day = lmonth + <span class="string">&quot;月&quot;</span> + lday;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(lunar_month_day);</span><br><span class="line">        <span class="keyword">return</span> lunar_month_day;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">NewTick</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> noww = newDate ? <span class="keyword">new</span> <span class="title class_">Date</span>(newDate) : <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">        <span class="keyword">if</span> (noww.<span class="title function_">getDate</span>() != nday) &#123;</span><br><span class="line">            nyear = noww.<span class="title function_">getFullYear</span>();</span><br><span class="line">            nmonth = noww.<span class="title function_">getMonth</span>() + <span class="number">1</span>;</span><br><span class="line">            nwday = noww.<span class="title function_">getDay</span>();</span><br><span class="line">            nday = noww.<span class="title function_">getDate</span>();</span><br><span class="line"></span><br><span class="line">            <span class="title function_">getlunar</span>(); <span class="comment">//获取农历</span></span><br><span class="line">        &#125;</span><br><span class="line">        nhrs = noww.<span class="title function_">getHours</span>();</span><br><span class="line">        nmin = noww.<span class="title function_">getMinutes</span>();</span><br><span class="line">        nsec = noww.<span class="title function_">getSeconds</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//辅助函数</span></span><br><span class="line">    <span class="keyword">var</span> hzWeek = <span class="keyword">new</span> <span class="title class_">Array</span>(<span class="string">&quot;日&quot;</span>, <span class="string">&quot;一&quot;</span>, <span class="string">&quot;二&quot;</span>, <span class="string">&quot;三&quot;</span>, <span class="string">&quot;四&quot;</span>, <span class="string">&quot;五&quot;</span>, <span class="string">&quot;六&quot;</span>, <span class="string">&quot;日&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">cweekday</span>(<span class="params">wday</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> hzWeek[wday];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">shapetime</span>(<span class="params">vhrs, vmin, vsec</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (vsec &lt;= <span class="number">9</span>) vsec = <span class="string">&quot;0&quot;</span> + vsec;</span><br><span class="line">        <span class="keyword">if</span> (vmin &lt;= <span class="number">9</span>) vmin = <span class="string">&quot;0&quot;</span> + vmin;</span><br><span class="line">        <span class="keyword">if</span> (vhrs &lt;= <span class="number">9</span>) vhrs = <span class="string">&quot;0&quot;</span> + vhrs;</span><br><span class="line">        <span class="keyword">return</span> vhrs + <span class="string">&quot;:&quot;</span> + vmin + <span class="string">&quot;:&quot;</span> + vsec</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//农历函数开始</span></span><br><span class="line">    <span class="keyword">var</span> lunarInfo = <span class="keyword">new</span> <span class="title class_">Array</span>(<span class="number">0x04bd8</span>, <span class="number">0x04ae0</span>, <span class="number">0x0a570</span>, <span class="number">0x054d5</span>, <span class="number">0x0d260</span>, <span class="number">0x0d950</span>, <span class="number">0x16554</span>, <span class="number">0x056a0</span>, <span class="number">0x09ad0</span>, <span class="number">0x055d2</span>, <span class="number">0x04ae0</span>, <span class="number">0x0a5b6</span>, <span class="number">0x0a4d0</span>, <span class="number">0x0d250</span>, <span class="number">0x1d255</span>, <span class="number">0x0b540</span>, <span class="number">0x0d6a0</span>, <span class="number">0x0ada2</span>, <span class="number">0x095b0</span>, <span class="number">0x14977</span>, <span class="number">0x04970</span>, <span class="number">0x0a4b0</span>, <span class="number">0x0b4b5</span>, <span class="number">0x06a50</span>, <span class="number">0x06d40</span>, <span class="number">0x1ab54</span>, <span class="number">0x02b60</span>, <span class="number">0x09570</span>, <span class="number">0x052f2</span>, <span class="number">0x04970</span>, <span class="number">0x06566</span>, <span class="number">0x0d4a0</span>, <span class="number">0x0ea50</span>, <span class="number">0x06e95</span>, <span class="number">0x05ad0</span>, <span class="number">0x02b60</span>, <span class="number">0x186e3</span>, <span class="number">0x092e0</span>, <span class="number">0x1c8d7</span>, <span class="number">0x0c950</span>, <span class="number">0x0d4a0</span>, <span class="number">0x1d8a6</span>, <span class="number">0x0b550</span>, <span class="number">0x056a0</span>, <span class="number">0x1a5b4</span>, <span class="number">0x025d0</span>, <span class="number">0x092d0</span>, <span class="number">0x0d2b2</span>, <span class="number">0x0a950</span>, <span class="number">0x0b557</span>, <span class="number">0x06ca0</span>, <span class="number">0x0b550</span>, <span class="number">0x15355</span>, <span class="number">0x04da0</span>, <span class="number">0x0a5b0</span>, <span class="number">0x14573</span>, <span class="number">0x052b0</span>, <span class="number">0x0a9a8</span>, <span class="number">0x0e950</span>, <span class="number">0x06aa0</span>, <span class="number">0x0aea6</span>, <span class="number">0x0ab50</span>, <span class="number">0x04b60</span>, <span class="number">0x0aae4</span>, <span class="number">0x0a570</span>, <span class="number">0x05260</span>, <span class="number">0x0f263</span>, <span class="number">0x0d950</span>, <span class="number">0x05b57</span>, <span class="number">0x056a0</span>, <span class="number">0x096d0</span>, <span class="number">0x04dd5</span>, <span class="number">0x04ad0</span>, <span class="number">0x0a4d0</span>, <span class="number">0x0d4d4</span>, <span class="number">0x0d250</span>, <span class="number">0x0d558</span>, <span class="number">0x0b540</span>, <span class="number">0x0b6a0</span>, <span class="number">0x195a6</span>, <span class="number">0x095b0</span>, <span class="number">0x049b0</span>, <span class="number">0x0a974</span>, <span class="number">0x0a4b0</span>, <span class="number">0x0b27a</span>, <span class="number">0x06a50</span>, <span class="number">0x06d40</span>, <span class="number">0x0af46</span>, <span class="number">0x0ab60</span>, <span class="number">0x09570</span>, <span class="number">0x04af5</span>, <span class="number">0x04970</span>, <span class="number">0x064b0</span>, <span class="number">0x074a3</span>, <span class="number">0x0ea50</span>, <span class="number">0x06b58</span>, <span class="number">0x05ac0</span>, <span class="number">0x0ab60</span>, <span class="number">0x096d5</span>, <span class="number">0x092e0</span>, <span class="comment">//1990</span></span><br><span class="line">        <span class="number">0x0c960</span>, <span class="number">0x0d954</span>, <span class="number">0x0d4a0</span>, <span class="number">0x0da50</span>, <span class="number">0x07552</span>, <span class="number">0x056a0</span>, <span class="number">0x0abb7</span>, <span class="number">0x025d0</span>, <span class="number">0x092d0</span>, <span class="number">0x0cab5</span>, <span class="number">0x0a950</span>, <span class="number">0x0b4a0</span>, <span class="number">0x0baa4</span>, <span class="number">0x0ad50</span>, <span class="number">0x055d9</span>, <span class="number">0x04ba0</span>, <span class="number">0x0a5b0</span>, <span class="number">0x15176</span>, <span class="number">0x052b0</span>, <span class="number">0x0a930</span>, <span class="number">0x07954</span>, <span class="number">0x06aa0</span>, <span class="number">0x0ad50</span>, <span class="number">0x05b52</span>, <span class="number">0x04b60</span>, <span class="number">0x0a6e6</span>, <span class="number">0x0a4e0</span>, <span class="number">0x0d260</span>, <span class="number">0x0ea65</span>, <span class="number">0x0d530</span>, <span class="number">0x05aa0</span>, <span class="number">0x076a3</span>, <span class="number">0x096d0</span>, <span class="number">0x04bd7</span>, <span class="number">0x04ad0</span>, <span class="number">0x0a4d0</span>, <span class="number">0x1d0b6</span>, <span class="number">0x0d250</span>, <span class="number">0x0d520</span>, <span class="number">0x0dd45</span>, <span class="number">0x0b5a0</span>, <span class="number">0x056d0</span>, <span class="number">0x055b2</span>, <span class="number">0x049b0</span>, <span class="number">0x0a577</span>, <span class="number">0x0a4b0</span>, <span class="number">0x0aa50</span>, <span class="number">0x1b255</span>, <span class="number">0x06d20</span>, <span class="number">0x0ada0</span>, <span class="number">0x14b63</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">lYearDays</span>(<span class="params">y</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> i, sum = <span class="number">348</span>;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0x8000</span>; i &gt; <span class="number">0x8</span>; i &gt;&gt;= <span class="number">1</span>) sum += (lunarInfo[y - <span class="number">1900</span>] &amp; i) ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> (sum + <span class="title function_">leapDays</span>(y));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">leapDays</span>(<span class="params">y</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_">leapMonth</span>(y)) <span class="keyword">return</span> ((lunarInfo[y - <span class="number">1900</span>] &amp; <span class="number">0x10000</span>) ? <span class="number">30</span> : <span class="number">29</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> (<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">leapMonth</span>(<span class="params">y</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> (lunarInfo[y - <span class="number">1900</span>] &amp; <span class="number">0xf</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">monthDays</span>(<span class="params">y, m</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> ((lunarInfo[y - <span class="number">1900</span>] &amp; (<span class="number">0x10000</span> &gt;&gt; m)) ? <span class="number">30</span> : <span class="number">29</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">Lunar</span>(<span class="params">y, m, d</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> i, leap = <span class="number">0</span>,</span><br><span class="line">            temp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">var</span> offset = (<span class="title class_">Date</span>.<span class="title function_">UTC</span>(y, m, d) - <span class="title class_">Date</span>.<span class="title function_">UTC</span>(<span class="number">1900</span>, <span class="number">0</span>, <span class="number">31</span>)) / <span class="number">86400000</span>;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1900</span>; i &lt; <span class="number">2050</span> &amp;&amp; offset &gt; <span class="number">0</span>; i++) &#123;</span><br><span class="line">            temp = <span class="title function_">lYearDays</span>(i);</span><br><span class="line">            offset -= temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (offset &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            offset += temp;</span><br><span class="line">            i--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">year</span> = i;</span><br><span class="line">        leap = <span class="title function_">leapMonth</span>(i);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">isLeap</span> = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; <span class="number">13</span> &amp;&amp; offset &gt; <span class="number">0</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (leap &gt; <span class="number">0</span> &amp;&amp; i == (leap + <span class="number">1</span>) &amp;&amp; <span class="variable language_">this</span>.<span class="property">isLeap</span> == <span class="literal">false</span>) &#123;</span><br><span class="line">                --i;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">isLeap</span> = <span class="literal">true</span>;</span><br><span class="line">                temp = <span class="title function_">leapDays</span>(<span class="variable language_">this</span>.<span class="property">year</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                temp = <span class="title function_">monthDays</span>(<span class="variable language_">this</span>.<span class="property">year</span>, i);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">isLeap</span> == <span class="literal">true</span> &amp;&amp; i == (leap + <span class="number">1</span>)) <span class="variable language_">this</span>.<span class="property">isLeap</span> = <span class="literal">false</span>;</span><br><span class="line">            offset -= temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (offset == <span class="number">0</span> &amp;&amp; leap &gt; <span class="number">0</span> &amp;&amp; i == leap + <span class="number">1</span>) <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">isLeap</span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">isLeap</span> = <span class="literal">false</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">isLeap</span> = <span class="literal">true</span>;</span><br><span class="line">            --i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (offset &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            offset += temp;</span><br><span class="line">            --i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">month</span> = i;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">day</span> = offset + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> nStr1 = <span class="keyword">new</span> <span class="title class_">Array</span>(<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;一&#x27;</span>, <span class="string">&#x27;二&#x27;</span>, <span class="string">&#x27;三&#x27;</span>, <span class="string">&#x27;四&#x27;</span>, <span class="string">&#x27;五&#x27;</span>, <span class="string">&#x27;六&#x27;</span>, <span class="string">&#x27;七&#x27;</span>, <span class="string">&#x27;八&#x27;</span>, <span class="string">&#x27;九&#x27;</span>, <span class="string">&#x27;十&#x27;</span>, <span class="string">&#x27;冬&#x27;</span>, <span class="string">&#x27;十二&#x27;</span>);</span><br><span class="line">    <span class="keyword">var</span> nStr2 = <span class="keyword">new</span> <span class="title class_">Array</span>(<span class="string">&#x27;初&#x27;</span>, <span class="string">&#x27;十&#x27;</span>, <span class="string">&#x27;廿&#x27;</span>, <span class="string">&#x27;卅&#x27;</span>, <span class="string">&#x27;□&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">GetcDay</span>(<span class="params">d</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> s;</span><br><span class="line">        <span class="keyword">switch</span> (d) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">10</span>:</span><br><span class="line">                s = <span class="string">&#x27;初十&#x27;</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">20</span>:</span><br><span class="line">                s = <span class="string">&#x27;二十&#x27;</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">30</span>:</span><br><span class="line">                s = <span class="string">&#x27;三十&#x27;</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="attr">default</span>:</span><br><span class="line">                s = nStr2[<span class="title class_">Math</span>.<span class="title function_">floor</span>(d / <span class="number">10</span>)];</span><br><span class="line">                s += nStr1[d % <span class="number">10</span>];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">GetcMon</span>(<span class="params">m</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (m == <span class="number">1</span>) <span class="keyword">return</span> <span class="string">&#x27;正&#x27;</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> nStr1[m];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">getlunar</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> lObj = <span class="keyword">new</span> <span class="title class_">Lunar</span>(nyear, nmonth - <span class="number">1</span>, nday);</span><br><span class="line">        lmonth = <span class="title class_">GetcMon</span>(lObj.<span class="property">month</span>);</span><br><span class="line">        lday = <span class="title class_">GetcDay</span>(lObj.<span class="property">day</span>);</span><br><span class="line">        lleap = lObj.<span class="property">isLeap</span>;</span><br><span class="line">        <span class="keyword">if</span> (lleap == <span class="number">1</span>) &#123;</span><br><span class="line">            lmonth = <span class="string">&quot;闰&quot;</span> + lmonth;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//农历函数结束</span></span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Draw</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getDate</span>(<span class="params">date</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> year = date.<span class="title function_">getFullYear</span>();</span><br><span class="line">    <span class="keyword">let</span> month = date.<span class="title function_">getMonth</span>() + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">let</span> day = date.<span class="title function_">getDate</span>();</span><br><span class="line">    <span class="keyword">return</span> year + <span class="string">&#x27;-&#x27;</span> + month + <span class="string">&#x27;-&#x27;</span> + day;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">getLunar</span>(<span class="title function_">getDate</span>(<span class="keyword">new</span> <span class="title class_">Date</span>())); <span class="comment">// 三月初六</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="跨文化编程的重要性"><a href="#跨文化编程的重要性" class="headerlink" title="跨文化编程的重要性"></a>跨文化编程的重要性</h2><p>在开发面向全球用户的Web应用时，考虑文化差异是提升用户体验的关键。通过JavaScript，我们可以：</p>
+<ul>
+<li><strong>提供本地化的内容</strong>：根据用户的地区和语言习惯展示内容。</li>
+<li><strong>尊重文化习俗</strong>：在设计UI和交互时避免文化冲突。</li>
+<li><strong>增强可访问性</strong>：确保所有用户，无论文化背景如何，都能轻松使用应用。</li>
+</ul>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>通过JavaScript，我们不仅能够创建动态的Web应用，还能够编写出尊重并适应不同文化背景的代码。实现农历日期的自动获取只是跨文化编程的一个例子，它展示了如何将特定文化的需求融入到Web开发中。随着Web技术的不断进步，我们期待未来能够有更多的工具和方法来支持跨文化编程，让Web应用更加多元化和包容。</p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://bestwishes0203.gitee.io/blog/2024/04/14/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%8E%B7%E5%8F%96%E5%86%9C%E5%8E%86%E6%97%A5%E6%9C%9F%EF%BC%9A%E6%8E%A2%E7%B4%A2JavaScript%E7%9A%84%E8%B7%A8%E6%96%87%E5%8C%96%E7%BC%96%E7%A8%8B/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/blog/2024/04/15/Vite%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%89%93%E5%8C%85%EF%BC%9A%E7%81%B5%E6%B4%BB%E9%AB%98%E6%95%88%E7%9A%84Vue%E5%BC%80%E5%8F%91%E5%B7%A5%E4%BD%9C%E6%B5%81/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Vite多环境配置与打包：灵活高效的Vue开发工作流
+          
+        </div>
+      </a>
+    
+    
+      <a href="/blog/2024/04/14/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%BB%9A%E5%8A%A8%E6%9D%A1%E6%A0%B7%E5%BC%8F%EF%BC%9A%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E8%B7%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">自定义滚动条样式：前端实现跨浏览器兼容</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022-2024
+        <i class="ri-heart-fill heart_icon"></i> 何福海
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/blog/"><img src="/blog/images/ayer.png" alt="何福海的个人博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="https://wallpaper.seenav.cn/">壁纸</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/blog/2022/01/01/%E5%85%B3%E4%BA%8E%E6%88%91/">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/blog/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯奶茶吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/blog/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/blog/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/blog/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/blog/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/blog/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/blog/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/blog/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/blog/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/blog/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/blog/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=1497588709&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
